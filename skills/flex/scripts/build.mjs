@@ -159,7 +159,7 @@ async function render({ withOg }) {
   const iconColour = hexOk(theme.accent) ? theme.accent : '#ff5a1f';
   const icon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="${iconColour}"/><text x="32" y="42" text-anchor="middle" font-family="system-ui,sans-serif" font-size="28" font-weight="700" fill="${inkFor(iconColour)}">${esc(initials(owner.name))}</text></svg>`;
   const name = owner.name ?? 'Portfolio';
-  const title = owner.title ?? `${name} — ${apps.length} apps shipped`;
+  const title = owner.title ?? `${name} — ${apps.length} ${apps.length === 1 ? 'app' : 'apps'} shipped`;
   const description = owner.bio ?? owner.headline?.replace(/\*/g, '') ?? `Everything ${name} has shipped.`;
   const site = owner.site?.replace(/\/$/, '');
   const fonts = theme.fonts === false ? '' : `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

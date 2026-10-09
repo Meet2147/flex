@@ -1,0 +1,10 @@
+{
+  "name": "flex-scripts",
+  "private": true,
+  "type": "module",
+  "description": "Capture and build scripts for the /flex skill.",
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "playwright": "^1.48.0"
+  }
+}

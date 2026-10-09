@@ -1,0 +1,26 @@
+/* genz: white and orange, thick outlines, hard shadows, lowercase, stickers. Light only. */
+:root { --bg: #ffffff; --fg: #0b0b0b; --muted: #4d4d4d; --line: #0b0b0b; --card: #ffffff; --chrome: #fff1e8; --accent: #ff4d00; --accent-ink: #ffffff; }
+.hero h1, .app h2, .end h2, .more h2, .card h3 { text-transform: lowercase; font-weight: 800; }
+.hero h1 em, .end h2 em { display: inline-block; padding: 0 0.16em; border-radius: 0.14em; background: var(--accent); color: var(--accent-ink); transform: rotate(-1.5deg); }
+.who .mono-avatar { border: 2px solid var(--fg); box-shadow: 3px 3px 0 var(--fg); }
+.facts li { padding: 10px 16px; border: 2px solid var(--fg); border-radius: 16px; box-shadow: 4px 4px 0 var(--fg); }
+.facts li:nth-child(even) { transform: rotate(1.5deg); background: var(--chrome); }
+.index { border-top: 2px solid var(--fg); }
+.index a { border-bottom: 2px solid var(--fg); }
+.index a:hover { background: var(--app); color: var(--app-ink); }
+.index a:hover .n, .index a:hover .tag, .index a:hover .meta { color: inherit; }
+.stage { background: color-mix(in oklab, var(--app) 24%, #ffffff); border: 2px solid var(--fg); box-shadow: 8px 8px 0 var(--fg); }
+.browser { border: 2px solid var(--fg); border-radius: 14px; box-shadow: none; }
+.bar { border-bottom: 2px solid var(--fg); }
+.bar .dots i { background: var(--fg); }
+.phone { box-shadow: 5px 5px 0 var(--fg); }
+.pill { border: 2px solid var(--fg); background: #ffffff; font-weight: 700; transform: rotate(-2deg); }
+.stack li { border: 1.5px solid var(--fg); border-radius: 99px; background: #ffffff; }
+.points li::before { width: 10px; height: 10px; border: 2px solid var(--fg); border-radius: 50%; }
+.btn { border: 2px solid var(--fg); background: #ffffff; box-shadow: 4px 4px 0 var(--fg); }
+.btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--fg); background: #ffffff; }
+.btn.primary { border-color: var(--fg); }
+.btn.primary:hover { background: var(--app); }
+.card { border: 2px solid var(--fg); box-shadow: 6px 6px 0 var(--fg); }
+.card:hover { box-shadow: 10px 10px 0 var(--fg); }
+.more, .end { border-top: 2px solid var(--fg); }

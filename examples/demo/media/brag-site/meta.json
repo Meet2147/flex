@@ -1,0 +1,43 @@
+{
+  "url": "https://latent-spaces.github.io/brag/",
+  "title": "brag — you built it. now brag.",
+  "description": "An agent skill that turns the project you created into a twenty-second launch video. One command. Postable everywhere.",
+  "siteName": null,
+  "ogImage": null,
+  "favicon": "https://latent-spaces.github.io/favicon.ico",
+  "lang": "en",
+  "background": "#ffffff",
+  "accent": "#e26a3a",
+  "fonts": {
+    "heading": "Geist",
+    "body": "Geist"
+  },
+  "h1": "you built it. now brag.",
+  "headings": [
+    "we run /brag for you.",
+    "/brag-slim NEW the same /brag, rebuilt lean for opus 5.5.",
+    "what twenty seconds of brag looks like.",
+    "now go brag."
+  ],
+  "calls": [
+    "skip to content",
+    "examples",
+    "install",
+    "web app",
+    "github",
+    "TAP FOR SOUND",
+    "COPY",
+    "@shunithaviv",
+    "your site",
+    "/brag",
+    "hyperframes"
+  ],
+  "links": {
+    "appStore": null,
+    "playStore": null,
+    "github": "https://github.com/latent-spaces/brag",
+    "productHunt": null,
+    "chromeStore": null
+  },
+  "scrollHeight": 4550
+}

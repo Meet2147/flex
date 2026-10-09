@@ -1,0 +1,20 @@
+/* professional: restrained, neutral, small radii. Follows light and dark. */
+:root { --bg: #ffffff; --fg: #111827; --muted: #5b6472; --line: #e5e7eb; --card: #ffffff; --chrome: #f3f4f6; --accent: #1d4ed8; --accent-ink: #ffffff; --display: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+@media (prefers-color-scheme: dark) { :root:not([data-mode="light"]) { --bg: #0b0f17; --fg: #e6e9ef; --muted: #9aa3b2; --line: #1f2633; --card: #111723; --chrome: #182030; --accent: #6ea0ff; --accent-ink: #0b0f17; } }
+:root[data-mode="dark"] { --bg: #0b0f17; --fg: #e6e9ef; --muted: #9aa3b2; --line: #1f2633; --card: #111723; --chrome: #182030; --accent: #6ea0ff; --accent-ink: #0b0f17; }
+.hero { padding-top: clamp(32px, 6vw, 72px); }
+.hero h1 { max-width: 24ch; font-size: clamp(2.1rem, 4.6vw, 3.6rem); font-weight: 650; line-height: 1.08; letter-spacing: -0.022em; }
+.hero h1 em, .end h2 em { color: inherit; box-shadow: inset 0 -0.14em 0 color-mix(in oklab, var(--accent) 45%, transparent); }
+.app h2 { font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 650; letter-spacing: -0.02em; }
+.end h2 { font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 650; }
+.facts b, .metrics b, .index .name, .card h3, .more h2 { font-weight: 650; }
+.stage { padding: clamp(16px, 3vw, 36px); border: 1px solid var(--line); border-radius: 12px; background: var(--chrome); }
+.browser { border-radius: 8px; box-shadow: 0 14px 32px -18px rgb(0 0 0 / 0.35), 0 0 0 1px rgb(0 0 0 / 0.06); }
+.btn { border-radius: 8px; }
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { background: color-mix(in oklab, var(--accent) 86%, var(--fg)); }
+.pill { border-radius: 6px; }
+.stack li { border-radius: 4px; }
+.points li::before { background: var(--accent); }
+.index a:hover { background: color-mix(in oklab, var(--accent) 7%, transparent); }
+.card { border-radius: 12px; }

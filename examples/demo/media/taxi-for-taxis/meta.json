@@ -1,0 +1,36 @@
+{
+  "url": "https://latent-spaces.github.io/brag/examples/taxi-for-taxis/",
+  "title": "Taxi for Taxis: when your taxi needs a taxi",
+  "description": "Cab-to-cab dispatch. We route the nearest cab to your tired cab. No surge for tired vehicles.",
+  "siteName": null,
+  "ogImage": null,
+  "favicon": "https://latent-spaces.github.io/favicon.ico",
+  "lang": "en",
+  "background": "#141833",
+  "accent": "#ffc41f",
+  "fonts": {
+    "heading": "Bungee",
+    "body": "Space Grotesk"
+  },
+  "h1": "WHEN YOUR TAXI NEEDS A TAXI.",
+  "headings": [
+    "THREE STEPS. ZERO WALKING.",
+    "YOUR CABS DESERVE BETTER."
+  ],
+  "calls": [
+    "T4T Taxi for Taxis",
+    "How it works",
+    "Live feed",
+    "Request pickup",
+    "Request a pickup",
+    "Create fleet account"
+  ],
+  "links": {
+    "appStore": null,
+    "playStore": null,
+    "github": null,
+    "productHunt": null,
+    "chromeStore": null
+  },
+  "scrollHeight": 3455
+}

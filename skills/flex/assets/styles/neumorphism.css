@@ -1,0 +1,22 @@
+/* neumorphism: one soft surface, shapes pushed out of it or pressed into it. Light only. */
+:root { --bg: #e7eaf0; --fg: #2b3140; --muted: #687085; --line: transparent; --card: #e7eaf0; --chrome: #e7eaf0; --accent: #ff5a1f; --accent-ink: #ffffff; --out: 9px 9px 20px #c3c8d2, -9px -9px 20px #ffffff; --in: inset 5px 5px 10px #c3c8d2, inset -5px -5px 10px #ffffff; }
+.who .mono-avatar { background: var(--bg); color: var(--accent); box-shadow: var(--out); }
+.facts li { padding: 14px 20px; border-radius: 20px; box-shadow: var(--out); }
+.index { border: 0; }
+.index a, .index a:hover { margin: 12px 0; padding: 16px 20px; border: 0; border-radius: 20px; background: none; box-shadow: var(--out); }
+.index a:hover { box-shadow: var(--in); }
+.stage { border-radius: 36px; background: var(--bg); box-shadow: var(--out); }
+.browser { padding: 10px; border-radius: 22px; background: var(--bg); box-shadow: var(--in); }
+.bar { background: none; }
+.bar .host { box-shadow: var(--in); background: none; }
+.screen { border-radius: 14px; overflow: hidden; }
+.phone { border-color: var(--bg); box-shadow: var(--out); background: var(--bg); }
+.pill, .stack li { padding: 7px 13px; border: 0; border-radius: 99px; background: var(--bg); box-shadow: var(--in); }
+.btn, .btn.primary { border: 0; background: var(--bg); color: var(--fg); box-shadow: var(--out); }
+.btn.primary { color: color-mix(in oklab, var(--app) 72%, #000000); }
+.btn:hover, .btn.primary:hover { transform: none; background: var(--bg); box-shadow: var(--in); }
+.points li::before { border-radius: 50%; box-shadow: 2px 2px 4px #c3c8d2, -2px -2px 4px #ffffff; }
+.card { border: 0; border-radius: 26px; box-shadow: var(--out); }
+.card:hover { transform: none; box-shadow: var(--in); }
+.card .screen { margin: 12px 12px 0; border-radius: 16px; }
+.more, .end { border-top: 0; }

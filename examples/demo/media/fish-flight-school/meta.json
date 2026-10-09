@@ -1,0 +1,38 @@
+{
+  "url": "https://latent-spaces.github.io/brag/examples/fish-flight-school/",
+  "title": "Fish Flight School: we teach fish to fly",
+  "description": "A twelve-week flight academy for fish. Flapping, leaving the water, and landing back in it. Some prior swimming recommended.",
+  "siteName": null,
+  "ogImage": null,
+  "favicon": "https://latent-spaces.github.io/favicon.ico",
+  "lang": "en",
+  "background": "#f6efe1",
+  "accent": "#f26b1d",
+  "fonts": {
+    "heading": "Big Shoulders Stencil Display",
+    "body": "Bricolage Grotesque"
+  },
+  "h1": "WE TEACH FISH TO FLY.",
+  "headings": [
+    "THREE COURSES. ONE SKY.",
+    "MEET CAPT. BUBBLES.",
+    "THE SKY IS WAITING."
+  ],
+  "calls": [
+    "FISH FLIGHT SCHOOL",
+    "Curriculum",
+    "Instructor",
+    "Enroll",
+    "Enroll for the spring cohort",
+    "See the flight path",
+    "Begin your ascent"
+  ],
+  "links": {
+    "appStore": null,
+    "playStore": null,
+    "github": null,
+    "productHunt": null,
+    "chromeStore": null
+  },
+  "scrollHeight": 4239
+}

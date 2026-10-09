@@ -1,0 +1,10 @@
+{
+  "name": "flex",
+  "description": "Turn every app you've built into one portfolio page, with real screenshots and short clips captured from the apps themselves.",
+  "version": "0.1.0",
+  "author": { "name": "Meet Jethwa", "url": "https://github.com/Meet2147" },
+  "license": "MIT",
+  "homepage": "https://github.com/Meet2147/flex",
+  "repository": "https://github.com/Meet2147/flex",
+  "keywords": ["portfolio", "indie", "showcase", "screenshots", "video", "skill"]
+}

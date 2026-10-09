@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en" data-style="genz" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meet Jethwa — 8 apps shipped</title>
+<meta name="description" content="I build native tools that do one job well: recording guides, keeping snippets, fixing posture, deciding what to buy. Most run entirely on your Mac.">
+<meta property="og:title" content="Meet Jethwa — 8 apps shipped">
+<meta property="og:description" content="I build native tools that do one job well: recording guides, keeping snippets, fixing posture, deciding what to buy. Most run entirely on your Mac.">
+<meta property="og:type" content="profile">
+
+<meta property="og:image" content="og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2216%22%20fill%3D%22%23ff4d00%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2242%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2Csans-serif%22%20font-size%3D%2228%22%20font-weight%3D%22700%22%20fill%3D%22%23ffffff%22%3EMJ%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=JetBrains+Mono:wght@500&display=swap">
+<style>/* /flex portfolio page. Restyle by editing the tokens in :root; each app section sets its own --app. */
+:root {
+  --bg: #f6f4ef;
+  --fg: #15140f;
+  --muted: #6b675c;
+  --line: #dedacf;
+  --card: #ffffff;
+  --chrome: #ecE9e0;
+  --accent: #ff5a1f;
+  --accent-ink: #ffffff;
+  --display: "Bricolage Grotesque", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --gutter: clamp(16px, 4vw, 56px);
+  --max: 1280px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-mode="light"]) {
+    --bg: #0e0e0c;
+    --fg: #f3f1ea;
+    --muted: #9c988b;
+    --line: #2a2924;
+    --card: #181815;
+    --chrome: #24231f;
+    color-scheme: dark;
+  }
+}
+:root[data-mode="dark"] {
+  --bg: #0e0e0c;
+  --fg: #f3f1ea;
+  --muted: #9c988b;
+  --line: #2a2924;
+  --card: #181815;
+  --chrome: #24231f;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.55 var(--body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; }
+img, video { display: block; max-width: 100%; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 16px; top: 16px; z-index: 10; padding: 8px 12px; background: var(--fg); color: var(--bg); border-radius: 8px; }
+.label { font: 500 12px/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* ---------- hero ---------- */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 0; }
+.who { display: flex; align-items: center; gap: 12px; font-weight: 600; text-decoration: none; }
+.who img, .who .mono-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+.who .mono-avatar { display: grid; place-items: center; background: var(--accent); color: var(--accent-ink); font: 700 16px var(--display); }
+.who small { display: block; font: 400 12px var(--mono); color: var(--muted); }
+.socials { display: flex; flex-wrap: wrap; gap: 4px 18px; justify-content: flex-end; font: 500 13px var(--mono); }
+.socials a { text-decoration: none; color: var(--muted); }
+.socials a:hover { color: var(--fg); text-decoration: underline; text-underline-offset: 4px; }
+
+.hero { padding: clamp(40px, 9vw, 120px) 0 clamp(32px, 5vw, 64px); }
+.hero h1 {
+  margin: 18px 0 0;
+  max-width: 16ch;
+  font: 700 clamp(2.6rem, 8.4vw, 7rem) / 0.95 var(--display);
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero .bio { max-width: 56ch; margin: 28px 0 0; font-size: clamp(1.05rem, 1.6vw, 1.3rem); color: var(--muted); text-wrap: pretty; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 32px 0 0; padding: 0; list-style: none; }
+.facts b { display: block; font: 700 clamp(1.5rem, 3vw, 2.2rem) / 1.1 var(--display); letter-spacing: -0.02em; }
+
+/* ---------- index ---------- */
+.index { margin: 0 0 clamp(48px, 8vw, 110px); padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.index a {
+  display: grid;
+  grid-template-columns: 3ch minmax(0, 1.1fr) minmax(0, 2fr) auto 1.2em;
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  transition: padding 0.2s, background 0.2s;
+}
+.index a:hover { padding-left: 14px; padding-right: 14px; background: color-mix(in oklab, var(--app) 14%, transparent); }
+.index .n, .index .meta { font: 500 12px var(--mono); color: var(--muted); }
+.index .name { font: 600 clamp(1.05rem, 2vw, 1.4rem) / 1.2 var(--display); letter-spacing: -0.01em; }
+.index .tag { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.index .go { transition: transform 0.2s; }
+.index a:hover .go { transform: translate(3px, 3px); }
+@media (max-width: 720px) {
+  .index a { grid-template-columns: 3ch minmax(0, 1fr) 1.2em; }
+  .index .tag, .index .meta { display: none; }
+}
+
+/* ---------- app sections ---------- */
+.app {
+  --app: var(--accent);
+  --app-ink: var(--accent-ink);
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 8fr);
+  gap: clamp(24px, 5vw, 72px);
+  align-items: center;
+  padding: clamp(36px, 6vw, 84px) 0;
+  scroll-margin-top: 12px;
+}
+.app:nth-of-type(even) .stage { order: -1; }
+@media (max-width: 900px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .app .stage { order: -1; }
+}
+.app-head { display: flex; align-items: center; gap: 12px; }
+.app-head .n { font: 500 13px var(--mono); color: var(--muted); }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border: 1px solid var(--line); border-radius: 99px; font: 500 11px/1 var(--mono); text-transform: uppercase; letter-spacing: 0.05em; }
+.pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--muted); }
+.pill.live::before { background: #1fbf5f; box-shadow: 0 0 0 3px rgb(31 191 95 / 0.2); }
+.pill.beta::before { background: #f5a524; }
+.pill.building::before { background: #3b82f6; }
+.app h2 { margin: 16px 0 0; font: 700 clamp(2rem, 4.6vw, 3.6rem) / 1 var(--display); letter-spacing: -0.03em; text-wrap: balance; }
+.app .tagline { margin: 12px 0 0; font-size: clamp(1.1rem, 1.7vw, 1.35rem); line-height: 1.35; text-wrap: balance; }
+.app .desc { margin: 14px 0 0; color: var(--muted); max-width: 52ch; text-wrap: pretty; }
+.points { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.points li { display: grid; grid-template-columns: 18px 1fr; gap: 8px; }
+.points li::before { content: ""; width: 8px; height: 8px; margin-top: 0.55em; border-radius: 2px; background: var(--app); }
+.metrics { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 22px 0 0; padding: 0; list-style: none; }
+.metrics b { display: block; font: 700 1.5rem/1.1 var(--display); letter-spacing: -0.02em; }
+.stack { display: flex; flex-wrap: wrap; gap: 6px; margin: 22px 0 0; padding: 0; list-style: none; }
+.stack li { padding: 4px 9px; border-radius: 6px; background: color-mix(in oklab, var(--fg) 7%, transparent); font: 500 12px var(--mono); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 0; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 99px; border: 1px solid var(--line); font-weight: 600; font-size: 15px; text-decoration: none; transition: transform 0.15s, background 0.15s; }
+.btn:hover { transform: translateY(-2px); background: color-mix(in oklab, var(--fg) 6%, transparent); }
+.btn.primary { background: var(--app); color: var(--app-ink); border-color: transparent; }
+.btn.primary:hover { background: color-mix(in oklab, var(--app) 88%, var(--fg)); }
+
+.stage {
+  position: relative;
+  padding: clamp(18px, 4vw, 52px);
+  border-radius: clamp(18px, 2.4vw, 32px);
+  background:
+    radial-gradient(120% 90% at 85% 0%, color-mix(in oklab, var(--app) 42%, transparent), transparent 62%),
+    color-mix(in oklab, var(--app) 16%, var(--card));
+  overflow: hidden;
+}
+.browser { position: relative; border-radius: 12px; overflow: hidden; background: var(--card); box-shadow: 0 34px 60px -24px rgb(0 0 0 / 0.42), 0 0 0 1px rgb(0 0 0 / 0.08); }
+.stage.has-phone .browser { width: 90%; }
+.bar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 9px 12px; background: var(--chrome); }
+.bar .dots { display: flex; gap: 6px; }
+.bar .dots i { width: 9px; height: 9px; border-radius: 50%; background: color-mix(in oklab, var(--fg) 22%, transparent); }
+.bar .host { max-width: 40ch; padding: 3px 14px; border-radius: 6px; background: color-mix(in oklab, var(--fg) 7%, transparent); font: 500 11px var(--mono); color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.screen { position: relative; aspect-ratio: 16 / 10; background: var(--card); }
+.screen > img, .screen > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.play { position: absolute; right: 12px; bottom: 12px; display: none; width: 40px; height: 40px; border: 0; border-radius: 50%; background: rgb(0 0 0 / 0.72); color: #fff; font-size: 14px; cursor: pointer; }
+.manual .play { display: grid; place-items: center; }
+.phone {
+  position: absolute;
+  right: clamp(10px, 3vw, 40px);
+  bottom: clamp(-34px, -3vw, -14px);
+  width: 23%;
+  aspect-ratio: 390 / 844;
+  border: clamp(3px, 0.5vw, 6px) solid #15140f;
+  border-radius: 13% / 6%;
+  overflow: hidden;
+  background: #15140f;
+  box-shadow: 0 24px 50px -14px rgb(0 0 0 / 0.5);
+}
+.phone img, .phone video { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.stage.phones { display: flex; justify-content: center; gap: clamp(10px, 2.4vw, 28px); padding-bottom: 0; }
+.stage.phones .phone { position: relative; right: auto; bottom: clamp(-40px, -3vw, -16px); width: min(30%, 240px); flex: none; }
+.stage.phones.bare .phone { aspect-ratio: auto; border: 0; border-radius: 14px; background: none; }
+.stage.plain .browser { display: none; }
+.stage.plain .screen { border-radius: 12px; overflow: hidden; box-shadow: 0 34px 60px -24px rgb(0 0 0 / 0.42); }
+.stage.empty { display: grid; place-items: center; min-height: 280px; font: 700 clamp(3rem, 10vw, 7rem) var(--display); color: color-mix(in oklab, var(--app) 70%, var(--fg)); letter-spacing: -0.04em; }
+
+/* ---------- more grid ---------- */
+.more { padding: clamp(36px, 6vw, 84px) 0; border-top: 1px solid var(--line); }
+.more h2 { margin: 10px 0 28px; font: 700 clamp(1.8rem, 4vw, 3rem) / 1 var(--display); letter-spacing: -0.03em; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 20px; }
+.card { --app: var(--accent); display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: var(--card); text-decoration: none; scroll-margin-top: 12px; transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 22px 40px -22px rgb(0 0 0 / 0.4); }
+.card .screen { background: color-mix(in oklab, var(--app) 18%, var(--card)); }
+.card .screen.tall { display: grid; place-items: end center; overflow: hidden; }
+.card .screen.tall > img { position: static; width: 36%; height: auto; aspect-ratio: 390 / 844; margin-bottom: -38%; border: 4px solid #15140f; border-radius: 22px; box-shadow: 0 18px 36px -14px rgb(0 0 0 / 0.5); }
+.card .body { padding: 16px 18px 18px; }
+.card h3 { margin: 0; font: 700 1.25rem/1.2 var(--display); letter-spacing: -0.01em; }
+.card p { margin: 6px 0 0; color: var(--muted); font-size: 14.5px; }
+.card .stack { margin-top: 12px; }
+
+/* ---------- footer ---------- */
+.end { padding: clamp(56px, 10vw, 140px) 0 28px; border-top: 1px solid var(--line); }
+.end h2 { margin: 14px 0 0; max-width: 14ch; font: 700 clamp(2.4rem, 7vw, 5.6rem) / 0.95 var(--display); letter-spacing: -0.035em; text-wrap: balance; }
+.end h2 em { font-style: normal; color: var(--accent); }
+.end .actions { margin-top: 32px; }
+.end .btn.primary { --app: var(--accent); --app-ink: var(--accent-ink); }
+.colophon { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; margin-top: clamp(48px, 8vw, 96px); font: 500 12px var(--mono); color: var(--muted); }
+.colophon a { text-underline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+
+/* genz: white and orange, thick outlines, hard shadows, lowercase, stickers. Light only. */
+:root { --bg: #ffffff; --fg: #0b0b0b; --muted: #4d4d4d; --line: #0b0b0b; --card: #ffffff; --chrome: #fff1e8; --accent: #ff4d00; --accent-ink: #ffffff; }
+.hero h1, .app h2, .end h2, .more h2, .card h3 { text-transform: lowercase; font-weight: 800; }
+.hero h1 em, .end h2 em { display: inline-block; padding: 0 0.16em; border-radius: 0.14em; background: var(--accent); color: var(--accent-ink); transform: rotate(-1.5deg); }
+.who .mono-avatar { border: 2px solid var(--fg); box-shadow: 3px 3px 0 var(--fg); }
+.facts li { padding: 10px 16px; border: 2px solid var(--fg); border-radius: 16px; box-shadow: 4px 4px 0 var(--fg); }
+.facts li:nth-child(even) { transform: rotate(1.5deg); background: var(--chrome); }
+.index { border-top: 2px solid var(--fg); }
+.index a { border-bottom: 2px solid var(--fg); }
+.index a:hover { background: var(--app); color: var(--app-ink); }
+.index a:hover .n, .index a:hover .tag, .index a:hover .meta { color: inherit; }
+.stage { background: color-mix(in oklab, var(--app) 24%, #ffffff); border: 2px solid var(--fg); box-shadow: 8px 8px 0 var(--fg); }
+.browser { border: 2px solid var(--fg); border-radius: 14px; box-shadow: none; }
+.bar { border-bottom: 2px solid var(--fg); }
+.bar .dots i { background: var(--fg); }
+.phone { box-shadow: 5px 5px 0 var(--fg); }
+.pill { border: 2px solid var(--fg); background: #ffffff; font-weight: 700; transform: rotate(-2deg); }
+.stack li { border: 1.5px solid var(--fg); border-radius: 99px; background: #ffffff; }
+.points li::before { width: 10px; height: 10px; border: 2px solid var(--fg); border-radius: 50%; }
+.btn { border: 2px solid var(--fg); background: #ffffff; box-shadow: 4px 4px 0 var(--fg); }
+.btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--fg); background: #ffffff; }
+.btn.primary { border-color: var(--fg); }
+.btn.primary:hover { background: var(--app); }
+.card { border: 2px solid var(--fg); box-shadow: 6px 6px 0 var(--fg); }
+.card:hover { box-shadow: 10px 10px 0 var(--fg); }
+.more, .end { border-top: 2px solid var(--fg); }
+
+:root{--accent:#ff4d00;--accent-ink:#ffffff}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Meet Jethwa","description":"I build native tools that do one job well: recording guides, keeping snippets, fixing posture, deciding what to buy. Most run entirely on your Mac.","sameAs":["https://x.com/theogmeet","https://github.com/Meet2147"],"owns":[{"@type":"SoftwareApplication","name":"Tapri","url":"https://tapri.dashovia.cafe/","description":"Ten Mac utilities in one native app."},{"@type":"SoftwareApplication","name":"Stepwise","url":"https://stepwise.dashovia.app/","description":"Record once. Get the guide."},{"@type":"SoftwareApplication","name":"Cadence","url":"https://cadence.dashovia.app/","description":"Screen guides in 5 steps, 1 minute each."},{"@type":"SoftwareApplication","name":"Pickwise","url":"https://pickwise.dashovia.app/","description":"Which one should I buy? Ask once."},{"@type":"SoftwareApplication","name":"CodeMate","url":"https://codemate.dashovia.app/","description":"Interview prep that feels like an IDE, not a website."},{"@type":"SoftwareApplication","name":"Cubby","url":"https://cubby.dashovia.app/","description":"Your stuff, in its place. One keystroke away."},{"@type":"SoftwareApplication","name":"Cairn","url":"https://cairn.dashovia.app/","description":"Stack your day in balance."},{"@type":"SoftwareApplication","name":"Brahma Muhurat","url":"https://apps.apple.com/in/app/brahma-muhurat/id6743993366","description":"The 48 minutes before dawn, timed for where you are."}]}</script>
+</head>
+<body>
+<a class="skip" href="#apps">Skip to apps</a>
+<header class="wrap">
+  <div class="top">
+    <a class="who" href="#">
+      <span class="mono-avatar" aria-hidden="true">MJ</span>
+      <span>Meet Jethwa<small>@theogmeet</small></span>
+    </a>
+    <nav class="socials" aria-label="Elsewhere"><a href="https://x.com/theogmeet" target="_blank" rel="noopener me">X</a><a href="https://github.com/Meet2147" target="_blank" rel="noopener me">GitHub</a></nav>
+  </div>
+  <div class="hero">
+    <span class="label">Indie developer</span>
+    <h1>Small, sharp Mac apps that <em>stay on your device.</em></h1>
+    <p class="bio">I build native tools that do one job well: recording guides, keeping snippets, fixing posture, deciding what to buy. Most run entirely on your Mac.</p>
+    <ul class="facts"><li><b>8</b><span class="label">apps shipped</span></li><li><b>7</b><span class="label">for macOS</span></li><li><b>1</b><span class="label">for iOS</span></li></ul>
+  </div>
+  <ol class="index" aria-label="All apps"><li><a href="#tapri" style="--app:#c4661a;--app-ink:#ffffff">
+      <span class="n">01</span><span class="name">Tapri</span><span class="tag">Ten Mac utilities in one native app.</span>
+      <span class="meta">macOS</span><span class="go" aria-hidden="true">↘</span></a></li><li><a href="#stepwise" style="--app:#2d69fa;--app-ink:#ffffff">
+      <span class="n">02</span><span class="name">Stepwise</span><span class="tag">Record once. Get the guide.</span>
+      <span class="meta">macOS</span><span class="go" aria-hidden="true">↘</span></a></li><li><a href="#cadence" style="--app:#ff4438;--app-ink:#ffffff">
+      <span class="n">03</span><span class="name">Cadence</span><span class="tag">Screen guides in 5 steps, 1 minute each.</span>
+      <span class="meta">macOS</span><span class="go" aria-hidden="true">↘</span></a></li><li><a href="#pickwise" style="--app:#4addff;--app-ink:#15140f">
+      <span class="n">04</span><span class="name">Pickwise</span><span class="tag">Which one should I buy? Ask once.</span>
+      <span class="meta">macOS</span><span class="go" aria-hidden="true">↘</span></a></li><li><a href="#codemate" style="--app:#8474f2;--app-ink:#ffffff">
+      <span class="n">05</span><span class="name">CodeMate</span><span class="tag">Interview prep that feels like an IDE, not a website.</span>
+      <span class="meta">macOS</span><span class="go" aria-hidden="true">↘</span></a></li><li><a href="#cubby" style="--app:#9b6bf4;--app-ink:#ffffff">
+      <span class="n">06</span><span class="name">Cubby</span><span class="tag">Your stuff, in its place. One keystroke away.</span>
+      <span class="meta">macOS</span><span class="go" aria-hidden="true">↘</span></a></li><li><a href="#cairn" style="--app:#e0a04a;--app-ink:#15140f">
+      <span class="n">07</span><span class="name">Cairn</span><span class="tag">Stack your day in balance.</span>
+      <span class="meta">macOS</span><span class="go" aria-hidden="true">↘</span></a></li><li><a href="#brahma-muhurat" style="--app:#7a5cf0;--app-ink:#ffffff">
+      <span class="n">08</span><span class="name">Brahma Muhurat</span><span class="tag">The 48 minutes before dawn, timed for where you are.</span>
+      <span class="meta">iOS</span><span class="go" aria-hidden="true">↘</span></a></li></ol>
+</header>
+<main class="wrap" id="apps">
+<section class="app" id="tapri" style="--app:#c4661a;--app-ink:#ffffff">
+    <div class="copy">
+      <div class="app-head"><span class="n">01</span><span class="pill live">Live</span></div>
+      <h2>Tapri</h2>
+      <p class="tagline">Ten Mac utilities in one native app.</p>
+      <p class="desc">Each utility is named for a spice in a cup of masala chai. Switch on the ones you want; anything left off holds no timers and costs nothing.</p>
+      <ul class="points"><li>Menu bar, clipboard, windows, system monitor, screenshot &amp; OCR, and five more</li><li>One menu bar item, one process, one thing to update</li><li>Four spices free forever</li></ul>
+      
+      <ul class="stack"><li>Native macOS</li><li>Apple silicon &amp; Intel</li><li>4.9 MB</li></ul>
+      <div class="actions"><a class="btn primary" href="https://tapri.dashovia.cafe/" target="_blank" rel="noopener">Visit site <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <div class="stage has-phone">
+      <div class="browser"><div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="host">tapri.dashovia.cafe</span><span></span></div><div class="screen"><video muted loop playsinline preload="none" data-src="media/tapri/clip.mp4" poster="media/tapri/desktop.jpg" aria-label="Tapri in use"></video><button class="play" type="button" aria-label="Play clip">▶</button></div></div><div class="phone"><img src="media/tapri/mobile.jpg" alt="Tapri on a phone" loading="eager" decoding="async"></div>
+    </div>
+  </section>
+<section class="app" id="stepwise" style="--app:#2d69fa;--app-ink:#ffffff">
+    <div class="copy">
+      <div class="app-head"><span class="n">02</span><span class="pill live">Live</span></div>
+      <h2>Stepwise</h2>
+      <p class="tagline">Record once. Get the guide.</p>
+      <p class="desc">Stepwise watches you do a task and writes it up: every click becomes a captioned, screenshotted step you can export as a PDF.</p>
+      <ul class="points"><li>Captions written from what you actually clicked</li><li>Keeps the screen recording beside the guide</li><li>Your screen never leaves your Mac</li></ul>
+      
+      <ul class="stack"><li>Native macOS</li><li>On-device</li><li>PDF export</li></ul>
+      <div class="actions"><a class="btn primary" href="https://stepwise.dashovia.app/" target="_blank" rel="noopener">Visit site <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <div class="stage has-phone">
+      <div class="browser"><div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="host">stepwise.dashovia.app</span><span></span></div><div class="screen"><video muted loop playsinline preload="none" data-src="media/stepwise/clip.mp4" poster="media/stepwise/desktop.jpg" aria-label="Stepwise in use"></video><button class="play" type="button" aria-label="Play clip">▶</button></div></div><div class="phone"><img src="media/stepwise/mobile.jpg" alt="Stepwise on a phone" loading="lazy" decoding="async"></div>
+    </div>
+  </section>
+<section class="app" id="cadence" style="--app:#ff4438;--app-ink:#ffffff">
+    <div class="copy">
+      <div class="app-head"><span class="n">03</span><span class="pill live">Live</span></div>
+      <h2>Cadence</h2>
+      <p class="tagline">Screen guides in 5 steps, 1 minute each.</p>
+      <p class="desc">A screen recorder that will not let you ramble. Each step auto-stops at 60 seconds, then everything is stitched into one MP4.</p>
+      <ul class="points"><li>Outline your steps, then record against the clock</li><li>Exports one MP4 with title cards and chapter markers</li><li>No timeline, no editing, no cloud</li></ul>
+      
+      <ul class="stack"><li>Native macOS</li><li>Apple silicon &amp; Intel</li><li>MP4 export</li></ul>
+      <div class="actions"><a class="btn primary" href="https://cadence.dashovia.app/" target="_blank" rel="noopener">Visit site <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <div class="stage has-phone">
+      <div class="browser"><div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="host">cadence.dashovia.app</span><span></span></div><div class="screen"><video muted loop playsinline preload="none" data-src="media/cadence/clip.mp4" poster="media/cadence/desktop.jpg" aria-label="Cadence in use"></video><button class="play" type="button" aria-label="Play clip">▶</button></div></div><div class="phone"><img src="media/cadence/mobile.jpg" alt="Cadence on a phone" loading="lazy" decoding="async"></div>
+    </div>
+  </section>
+<section class="app" id="pickwise" style="--app:#4addff;--app-ink:#15140f">
+    <div class="copy">
+      <div class="app-head"><span class="n">04</span><span class="pill live">Live</span></div>
+      <h2>Pickwise</h2>
+      <p class="tagline">Which one should I buy? Ask once.</p>
+      <p class="desc">Give Pickwise two to five products and it compares current price, specs and trade-offs, then commits to one verdict with the reasoning.</p>
+      <ul class="points"><li>A comparison table with honest pros and cons</li><li>One answer instead of thirty tabs of research</li><li>Coming to iPhone</li></ul>
+      
+      <ul class="stack"><li>Native macOS</li><li>Apple silicon &amp; Intel</li></ul>
+      <div class="actions"><a class="btn primary" href="https://pickwise.dashovia.app/" target="_blank" rel="noopener">Visit site <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <div class="stage has-phone">
+      <div class="browser"><div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="host">pickwise.dashovia.app</span><span></span></div><div class="screen"><video muted loop playsinline preload="none" data-src="media/pickwise/clip.mp4" poster="media/pickwise/desktop.jpg" aria-label="Pickwise in use"></video><button class="play" type="button" aria-label="Play clip">▶</button></div></div><div class="phone"><img src="media/pickwise/mobile.jpg" alt="Pickwise on a phone" loading="lazy" decoding="async"></div>
+    </div>
+  </section>
+<section class="app" id="codemate" style="--app:#8474f2;--app-ink:#ffffff">
+    <div class="copy">
+      <div class="app-head"><span class="n">05</span><span class="pill beta">Beta</span></div>
+      <h2>CodeMate</h2>
+      <p class="tagline">Interview prep that feels like an IDE, not a website.</p>
+      <p class="desc">A native Mac app for DSA and system-design prep, with a guided roadmap so you always know what is next.</p>
+      <ul class="points"><li>Real test-case grading for Swift, Python and JavaScript, run locally</li><li>On-device AI assistant: no API key, no per-message cost</li><li>A whiteboard for LLD and HLD questions</li></ul>
+      
+      <ul class="stack"><li>Native macOS</li><li>Apple silicon</li><li>On-device AI</li></ul>
+      <div class="actions"><a class="btn primary" href="https://codemate.dashovia.app/" target="_blank" rel="noopener">Visit site <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <div class="stage has-phone">
+      <div class="browser"><div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="host">codemate.dashovia.app</span><span></span></div><div class="screen"><video muted loop playsinline preload="none" data-src="media/codemate/clip.mp4" poster="media/codemate/desktop.jpg" aria-label="CodeMate in use"></video><button class="play" type="button" aria-label="Play clip">▶</button></div></div><div class="phone"><img src="media/codemate/mobile.jpg" alt="CodeMate on a phone" loading="lazy" decoding="async"></div>
+    </div>
+  </section>
+<section class="app" id="cubby" style="--app:#9b6bf4;--app-ink:#ffffff">
+    <div class="copy">
+      <div class="app-head"><span class="n">06</span><span class="pill live">Live</span></div>
+      <h2>Cubby</h2>
+      <p class="tagline">Your stuff, in its place. One keystroke away.</p>
+      <p class="desc">A menu-bar vault for the things you paste every day. Press a hotkey, type to filter, hit return, and it is copied.</p>
+      <ul class="points"><li>Named compartments for phone numbers, API keys and bank details</li><li>Secrets backed by the macOS Keychain</li><li>No accounts, no servers, no telemetry</li></ul>
+      
+      <ul class="stack"><li>Native macOS</li><li>Keychain</li><li>On-device</li></ul>
+      <div class="actions"><a class="btn primary" href="https://cubby.dashovia.app/" target="_blank" rel="noopener">Visit site <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <div class="stage has-phone">
+      <div class="browser"><div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="host">cubby.dashovia.app</span><span></span></div><div class="screen"><video muted loop playsinline preload="none" data-src="media/cubby/clip.mp4" poster="media/cubby/desktop.jpg" aria-label="Cubby in use"></video><button class="play" type="button" aria-label="Play clip">▶</button></div></div><div class="phone"><img src="media/cubby/mobile.jpg" alt="Cubby on a phone" loading="lazy" decoding="async"></div>
+    </div>
+  </section>
+<section class="app" id="cairn" style="--app:#e0a04a;--app-ink:#15140f">
+    <div class="copy">
+      <div class="app-head"><span class="n">07</span><span class="pill pre-order">Pre-order</span></div>
+      <h2>Cairn</h2>
+      <p class="tagline">Stack your day in balance.</p>
+      <p class="desc">Desk wellness for macOS. Cairn reads your posture, eyes and screen distance through the webcam and nudges you before the slump sets in.</p>
+      <ul class="points"><li>Tracks eye strain, screen distance and slouching</li><li>A stretch coach that follows your form</li><li>Every frame analysed on-device; nothing recorded or uploaded</li></ul>
+      
+      <ul class="stack"><li>Native macOS</li><li>MediaPipe</li><li>On-device AI</li></ul>
+      <div class="actions"><a class="btn primary" href="https://cairn.dashovia.app/" target="_blank" rel="noopener">Visit site <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <div class="stage has-phone">
+      <div class="browser"><div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="host">cairn.dashovia.app</span><span></span></div><div class="screen"><video muted loop playsinline preload="none" data-src="media/cairn/clip.mp4" poster="media/cairn/desktop.jpg" aria-label="Cairn in use"></video><button class="play" type="button" aria-label="Play clip">▶</button></div></div><div class="phone"><img src="media/cairn/mobile.jpg" alt="Cairn on a phone" loading="lazy" decoding="async"></div>
+    </div>
+  </section>
+<section class="app" id="brahma-muhurat" style="--app:#7a5cf0;--app-ink:#ffffff">
+    <div class="copy">
+      <div class="app-head"><span class="n">08</span><span class="pill live">Live</span></div>
+      <h2>Brahma Muhurat</h2>
+      <p class="tagline">The 48 minutes before dawn, timed for where you are.</p>
+      <p class="desc">Brahma Muhurat begins 1 hour 36 minutes before sunrise. The app works out that window for your location, along with the rest of the day&#39;s light.</p>
+      <ul class="points"><li>Timings for today, tomorrow and the day after</li><li>First light, dawn, solar noon, golden hour and dusk</li><li>Moon phase tracker</li></ul>
+      
+      <ul class="stack"><li>iOS 17.6+</li><li>iPhone &amp; iPad</li></ul>
+      <div class="actions"><a class="btn primary" href="https://apps.apple.com/in/app/brahma-muhurat/id6743993366" target="_blank" rel="noopener">View on the App Store <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <div class="stage phones bare"><div class="phone"><img src="media/brahma-muhurat/shot1.jpg" alt="Brahma Muhurat screen 1" loading="lazy" decoding="async"></div><div class="phone"><img src="media/brahma-muhurat/shot2.jpg" alt="Brahma Muhurat screen 2" loading="lazy" decoding="async"></div><div class="phone"><img src="media/brahma-muhurat/shot3.jpg" alt="Brahma Muhurat screen 3" loading="lazy" decoding="async"></div></div>
+  </section>
+
+</main>
+<footer class="wrap end">
+  <span class="label">Contact</span>
+  <h2>Using one of these? <em>Tell me what&#39;s missing.</em></h2>
+  <div class="actions"><a class="btn primary" href="https://x.com/theogmeet" target="_blank" rel="noopener me">X</a><a class="btn" href="https://github.com/Meet2147" target="_blank" rel="noopener me">GitHub</a></div>
+  <div class="colophon"><span>© 2026 Meet Jethwa</span><span>Made with <a href="https://github.com/Meet2147/flex">/flex</a></span></div>
+</footer>
+<script>// Clips load and play only while on screen. With reduced motion (or blocked autoplay) they wait for a tap.
+(() => {
+  const clips = [...document.querySelectorAll('video[data-src]')];
+  if (!clips.length) return;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const manual = (video) => video.closest('.screen, .phone')?.classList.add('manual');
+
+  const start = (video) => {
+    if (!video.src) video.src = video.dataset.src;
+    return video.play();
+  };
+
+  for (const video of clips) {
+    const button = video.parentElement.querySelector('.play');
+    button?.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (video.paused) start(video).catch(() => {});
+      else video.pause();
+    });
+    video.addEventListener('play', () => button && (button.textContent = '❚❚', button.setAttribute('aria-label', 'Pause clip')));
+    video.addEventListener('pause', () => button && (button.textContent = '▶', button.setAttribute('aria-label', 'Play clip')));
+    if (reduced) manual(video);
+  }
+  if (reduced || !('IntersectionObserver' in window)) return clips.forEach(manual);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const { target: video, isIntersecting } of entries) {
+        if (isIntersecting) start(video).catch(() => manual(video));
+        else video.pause();
+      }
+    },
+    { threshold: 0.45 },
+  );
+  clips.forEach((video) => observer.observe(video));
+})();
+</script>
+</body>
+</html>

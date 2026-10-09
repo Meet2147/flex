@@ -1,0 +1,62 @@
+{
+  "owner": {
+    "name": "Robin Sample",
+    "handle": "@robinships",
+    "role": "Indie developer",
+    "location": "Demo data",
+    "headline": "I build small apps for *very* specific animals.",
+    "bio": "A fictional developer, here to show what /flex produces. The apps are the parody sites from the brag repo, captured straight from their live URLs.",
+    "since": 2021,
+    "email": "robin@example.com",
+    "links": [
+      { "label": "GitHub", "url": "https://github.com/latent-spaces/brag" },
+      { "label": "X", "url": "https://x.com" }
+    ],
+    "cta": "Have a niche that needs an app? *Say hello.*"
+  },
+  "theme": { "mode": "auto", "accent": "#ff5a1f", "featuredCount": 3 },
+  "apps": [
+    {
+      "slug": "horse-tinder", "name": "Horse Tinder", "year": 2024, "status": "Live", "platforms": ["iOS", "Android"],
+      "tagline": "Find your soulmare.",
+      "description": "The dating app for horses. Matches within a comfortable canter of your stable, filtered by hay.",
+      "highlights": ["Verified profiles — no impostors, no donkeys", "Match radius measured in canters", "Hay-preference filters"],
+      "stack": ["React Native", "Expo", "Supabase"],
+      "url": "https://latent-spaces.github.io/brag/examples/horse-tinder/", "cta": "Visit site",
+      "accent": "#ff4f7e",
+      "media": { "desktop": "media/horse-tinder/desktop.jpg", "mobile": "media/horse-tinder/mobile.jpg", "clip": "media/horse-tinder/clip.mp4" }
+    },
+    {
+      "slug": "fish-flight-school", "name": "Fish Flight School", "year": 2023, "status": "Live", "platforms": ["Web"],
+      "tagline": "We teach fish to fly.",
+      "description": "A twelve-week flight academy for fish: flapping, leaving the water, and landing back in it.",
+      "highlights": ["Twelve-week syllabus", "Some prior swimming recommended"],
+      "stack": ["Astro", "Tailwind", "Stripe"],
+      "url": "https://latent-spaces.github.io/brag/examples/fish-flight-school/", "cta": "Visit site",
+      "accent": "#f26b1d",
+      "media": { "desktop": "media/fish-flight-school/desktop.jpg", "mobile": "media/fish-flight-school/mobile.jpg", "clip": "media/fish-flight-school/clip.mp4" }
+    },
+    {
+      "slug": "taxi-for-taxis", "name": "Taxi for Taxis", "year": 2022, "status": "Beta", "platforms": ["Web"],
+      "tagline": "When your taxi needs a taxi.",
+      "description": "Cab-to-cab dispatch that routes the nearest cab to your tired cab. No surge for tired vehicles.",
+      "stack": ["Next.js", "Postgres", "Mapbox"],
+      "url": "https://latent-spaces.github.io/brag/examples/taxi-for-taxis/", "cta": "Visit site",
+      "accent": "#ffc41f",
+      "media": { "desktop": "media/taxi-for-taxis/desktop.jpg", "clip": "media/taxi-for-taxis/clip.mp4" }
+    },
+    {
+      "slug": "brag-site", "name": "brag", "year": 2026, "platforms": ["Skill"],
+      "tagline": "The launch-video skill that inspired this one.",
+      "stack": ["Agent skill", "Hyperframes"],
+      "url": "https://latent-spaces.github.io/brag/", "accent": "#e26a3a",
+      "media": { "desktop": "media/brag-site/desktop.jpg", "clip": "media/brag-site/clip.mp4" }
+    },
+    {
+      "slug": "pocket-app", "name": "Phone-only example", "year": 2025, "platforms": ["iOS"],
+      "tagline": "Apps with only phone screenshots get a phone frame.",
+      "stack": ["SwiftUI"], "accent": "#3b82f6",
+      "media": { "mobile": "media/horse-tinder/mobile.jpg" }
+    }
+  ]
+}

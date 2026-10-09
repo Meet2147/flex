@@ -1,0 +1,34 @@
+# Render blueprint for the hosted service. The disk keeps orders and generated pages across deploys.
+services:
+  - type: web
+    name: flex
+    runtime: docker
+    dockerfilePath: ./app/Dockerfile
+    dockerContext: .
+    plan: starter
+    healthCheckPath: /healthz
+    disk:
+      name: flex-data
+      mountPath: /data
+      sizeGB: 5
+    envVars:
+      - key: BASE_URL
+        value: https://letsflex.app
+      - key: POLAR_ACCESS_TOKEN
+        sync: false
+      - key: POLAR_PRODUCT_ID
+        sync: false
+      - key: POLAR_WEBHOOK_SECRET
+        sync: false
+      - key: POLAR_SANDBOX
+        value: "false"
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: OPERATOR_NAME
+        value: Dashovia Innovations
+      - key: OPERATOR_LOCATION
+        sync: false
+      - key: SUPPORT_EMAIL
+        sync: false
+      - key: FLEX_MODEL
+        value: claude-opus-5-5

@@ -1,0 +1,21 @@
+/* appstore: grey canvas, white rounded cards, system type, pill buttons. Light only. */
+:root { --bg: #f5f5f7; --fg: #1d1d1f; --muted: #6e6e73; --line: #e3e3e8; --card: #ffffff; --chrome: #f0f0f3; --accent: #0a84ff; --accent-ink: #ffffff; --display: -apple-system, "SF Pro Display", "Helvetica Neue", system-ui, sans-serif; --body: -apple-system, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif; }
+.hero h1 { max-width: 20ch; font-size: clamp(2.3rem, 5.4vw, 4rem); font-weight: 700; line-height: 1.04; letter-spacing: -0.025em; }
+.index { padding: 4px 20px; border: 0; border-radius: 22px; background: var(--card); }
+.index li:last-child a { border-bottom: 0; }
+.index a:hover { padding-left: 4px; padding-right: 4px; background: none; }
+.index a:hover .name { color: var(--accent); }
+.app { margin-bottom: 24px; padding: clamp(20px, 3.4vw, 48px); border-radius: 28px; background: var(--card); }
+.app h2 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 700; letter-spacing: -0.022em; }
+.stage { border-radius: 22px; background: linear-gradient(160deg, color-mix(in oklab, var(--app) 34%, #ffffff), color-mix(in oklab, var(--app) 8%, #ffffff)); }
+.browser { border-radius: 14px; }
+.pill { border: 0; background: var(--chrome); color: var(--muted); }
+.stack li { border-radius: 99px; background: var(--chrome); color: var(--muted); }
+.btn { border: 0; background: var(--chrome); color: var(--accent); font-weight: 700; padding: 9px 22px; }
+.btn.primary { background: var(--accent); color: #ffffff; text-transform: uppercase; letter-spacing: 0.02em; font-size: 14px; }
+.btn.primary:hover { background: color-mix(in oklab, var(--accent) 88%, #000000); }
+.points li::before { border-radius: 50%; }
+.more { border-top: 0; }
+.card { border: 0; border-radius: 22px; }
+.end { margin-top: 24px; padding-left: clamp(20px, 3.4vw, 48px); padding-right: clamp(20px, 3.4vw, 48px); border-top: 0; border-radius: 28px 28px 0 0; background: var(--card); }
+.end h2, .more h2 { font-weight: 700; }

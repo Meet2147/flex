@@ -1,0 +1,38 @@
+{
+  "url": "https://latent-spaces.github.io/brag/examples/horse-tinder/",
+  "title": "Horse Tinder: find your soulmare",
+  "description": "The dating app for horses. Matches within a comfortable canter of your stable. No impostors. No donkeys.",
+  "siteName": null,
+  "ogImage": null,
+  "favicon": "https://latent-spaces.github.io/favicon.ico",
+  "lang": "en",
+  "background": "#fff4e6",
+  "accent": "#ff4f7e",
+  "fonts": {
+    "heading": "Shrikhand",
+    "body": "Figtree"
+  },
+  "h1": "Find your soulmare.",
+  "headings": [
+    "Thunder, 8 ✓ VERIFIED",
+    "Love at first canter.",
+    "Thunder & Clover",
+    "Your soulmare is out there."
+  ],
+  "calls": [
+    "horse tinder",
+    "Get the app",
+    "Download on the Hay Store",
+    "Get it on Google Pasture",
+    "✕",
+    "♥"
+  ],
+  "links": {
+    "appStore": null,
+    "playStore": null,
+    "github": null,
+    "productHunt": null,
+    "chromeStore": null
+  },
+  "scrollHeight": 3621
+}

@@ -1,0 +1,15 @@
+[
+  { "slug": "horse-tinder", "url": "https://latent-spaces.github.io/brag/examples/horse-tinder/",
+    "plan": [
+      { "do": "wait", "ms": 700 },
+      { "do": "click", "selector": "button:has-text('♥')", "ms": 1100 },
+      { "do": "scroll", "to": 0.55, "ms": 2200 },
+      { "do": "wait", "ms": 500 },
+      { "do": "scroll", "to": 1, "ms": 1600 },
+      { "do": "wait", "ms": 600 },
+      { "do": "scroll", "to": 0, "ms": 800 }
+    ] },
+  { "slug": "fish-flight-school", "url": "https://latent-spaces.github.io/brag/examples/fish-flight-school/" },
+  { "slug": "taxi-for-taxis", "url": "https://latent-spaces.github.io/brag/examples/taxi-for-taxis/" },
+  { "slug": "brag-site", "url": "https://latent-spaces.github.io/brag/", "plan": [] }
+]

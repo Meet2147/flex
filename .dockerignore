@@ -1,0 +1,7 @@
+**/node_modules
+**/.frames
+app/data
+app/.env
+examples
+docs
+.git

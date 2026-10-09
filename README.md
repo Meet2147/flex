@@ -1,12 +1,20 @@
 # /flex
 
-**Everything you've shipped, on one page.**
+**You shipped it. Now flex.**
+
+> **Want a page without running `/flex` yourself?** Paste your app links at [letsflex.app](https://letsflex.app).
+
+[![a portfolio page made by /flex](app/example/og.jpg)](https://letsflex.app/example/)
 
 `/flex` is an agent skill for indie developers. Point it at your apps (deployed URLs, project folders, or a folder full of projects) and it builds a one-page portfolio: every app captured actually running, with screenshots, a short looping MP4 clip, copy written from the real product, and a link to try it.
 
 No CMS, no template to fill in, no screenshots to take by hand.
 
-![demo page](examples/demo/og.jpg)
+## Rather not run it yourself? Use letsflex.app
+
+[letsflex.app](https://letsflex.app) runs `/flex` for you. Paste your links, pick a style, and get a hosted page a few minutes later. Three apps with screenshots are free; a Page Pass ($29, once) covers twelve apps with video clips and a zip download. No account.
+
+The skill stays free and open source. Install it below and run it yourself anytime.
 
 ## Install
 
@@ -32,8 +40,9 @@ Try it from a local checkout without installing: `claude --plugin-dir /path/to/f
 ```
 
 ```text
-/flex ~/code            # scans the folder, asks which projects to include
-/flex --add https://newapp.dev
+/flex ~/code                              # scans the folder, asks which projects to include
+/flex --add https://newapp.dev            # add an app to an existing page
+/flex --style glass https://myapp.com     # pick the look
 ```
 
 You get a `portfolio/` folder:
@@ -46,14 +55,38 @@ portfolio/
   media/<app>/        desktop.jpg, mobile.jpg, clip.mp4, meta.json
 ```
 
-It is a static site. Host it free on GitHub Pages, Cloudflare Pages, Netlify or Vercel.
+It is a static site. Host it free on GitHub Pages, Cloudflare Pages, Netlify, Vercel or Render.
+
+## Styles
+
+One portfolio look for everyone gets boring fast, so there are seven. The same `portfolio.json` builds in any of them.
+
+![the seven styles](docs/styles.jpg)
+
+| Style | Feel | Suits |
+|---|---|---|
+| `editorial` | Big type on warm paper, each app tinted its own colour | The default; most portfolios |
+| `genz` | White and orange, thick outlines, hard shadows, lowercase | Playful products, a loud personal brand |
+| `professional` | Quiet, neutral, small radii | Job hunting, client work, B2B tools |
+| `appstore` | White cards on soft grey, pill buttons | Mostly mobile apps |
+| `apple` | Centred, huge headlines, lots of air, one column | A few polished apps with strong visuals |
+| `glass` | Frosted panels over colour blooms; dark only | Design tools, anything visual |
+| `neumorphism` | One soft surface, raised and pressed shapes; light only | Calm utilities, a small set of apps |
+
+Ask for one in plain language ("make it glass") or with `--style`. To change an existing page, set `"style"` under `"theme"` in `portfolio.json` and rebuild:
+
+```bash
+node skills/flex/scripts/build.mjs portfolio/portfolio.json --og
+```
+
+The style also sets the voice of the copy: `genz` gets short, casual lines, `professional` gets complete, measured sentences. Nothing is invented in any of them.
 
 ## How it works
 
-1. **Gather.** Finds each app's deployed URL, or runs the project locally. Native and CLI apps use their existing screenshots.
-2. **Understand.** Reads the code or the live site and writes a tagline, description, highlights and stack. Nothing invented: no fake metrics or testimonials.
-3. **Capture.** `scripts/capture.mjs` drives a headless browser: desktop and phone screenshots, plus a clip recorded from a scripted scroll or a click-and-type plan, encoded with ffmpeg. It also reads each app's colours so every section takes on its app's accent.
-4. **Build.** `scripts/build.mjs` turns `portfolio.json` into the page. Clips load and play only while on screen, and respect reduced-motion.
+1. **Gather.** Finds each app's deployed URL, or runs the project locally. Native and CLI apps use their existing screenshots; App Store links use the listing's own.
+2. **Understand.** Reads the code or the live site and writes a tagline, description, highlights and stack. No fake metrics or testimonials.
+3. **Capture.** `scripts/capture.mjs` drives a headless browser: desktop and phone screenshots, plus a clip recorded from a scripted scroll or a click-and-type plan, encoded with ffmpeg. Intro and "tap to enter" screens are clicked through automatically. It also reads each app's colours so every section takes on its app's accent.
+4. **Build.** `scripts/build.mjs` turns `portfolio.json` into the page in the chosen style. Clips load and play only while on screen, and respect reduced-motion.
 
 The scripts work on their own too:
 
@@ -70,12 +103,17 @@ node skills/flex/scripts/build.mjs portfolio/portfolio.json --og
 - FFmpeg on `PATH`
 - Chromium via Playwright, or Chrome already installed
 
-## Demo
+## What's in this repo
 
-[`examples/demo/`](examples/demo/) is a page for a fictional developer. Its "apps" are the parody product sites from [brag](https://github.com/latent-spaces/brag) (MIT), captured from their live URLs. Serve the folder to view it: `python3 -m http.server --directory examples/demo`.
+- `skills/flex/` — the skill: instructions, capture and build scripts, the page template and its seven styles
+- `app/` — the hosted service behind letsflex.app; see [app/README.md](app/README.md)
+- `examples/demo/` — a page for a fictional developer, built from the parody product sites in [brag](https://github.com/latent-spaces/brag) (MIT)
+- `docs/` — product and pricing notes
+- `.claude-plugin/` — Claude Code plugin manifest and marketplace catalog
+- `.claude/skills/flex`, `.agents/skills/flex` — symlinks so agents find the skill in a local checkout
 
 ## Credits
 
 Inspired by [/brag](https://github.com/latent-spaces/brag), which makes a launch video for one project. `/flex` makes the page for all of them.
 
-MIT licensed. Product and pricing notes are in [docs/BUSINESS.md](docs/BUSINESS.md).
+MIT licensed.

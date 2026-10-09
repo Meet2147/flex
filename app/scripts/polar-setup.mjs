@@ -110,8 +110,12 @@ if (args.links && !args['dry-run']) {
         success_url: `${baseUrl}/thanks?checkout_id={CHECKOUT_ID}`,
         metadata: { app: 'flex', plan },
       }));
+    // A link made while BASE_URL was something else still sends buyers back there: point it at the current address.
+    const successUrl = `${baseUrl}/thanks?checkout_id={CHECKOUT_ID}`;
+    const moved = found && found.success_url !== successUrl;
+    if (moved) await polar('PATCH', `/v1/checkout-links/${found.id}`, { success_url: successUrl });
     links[plan] = link.url;
-    console.log(`${found ? 'exists' : 'created'}  link  ${CATALOG[plan].name.padEnd(28)} ${link.url}`);
+    console.log(`${moved ? 'updated' : found ? 'exists ' : 'created'}  link  ${CATALOG[plan].name.padEnd(28)} ${link.url}${moved ? `  (now returns to ${baseUrl})` : ''}`);
   }
 }
 

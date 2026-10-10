@@ -100,9 +100,6 @@ if (order) {
       const extras = [];
       if (state.reel) {
         nodes.push(link('Download reel', state.reel));
-        const box = Object.assign(document.createElement('div'), { className: 'reelbox' });
-        box.append(Object.assign(document.createElement('video'), { src: `${state.reel}?view=1`, controls: true, playsInline: true, preload: 'metadata' }));
-        extras.push(box);
       } else if (state.reelError) {
         extras.push(Object.assign(document.createElement('p'), { className: 'note', textContent: state.reelError }));
       }

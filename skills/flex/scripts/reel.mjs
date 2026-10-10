@@ -230,7 +230,7 @@ try {
   console.error('playwright is not installed. Run npm install in the scripts folder.');
   process.exit(2);
 }
-const browser = await chromium.launch().catch(() => chromium.launch({ channel: 'chrome' }));
+const browser = await chromium.launch({ args: ['--disable-dev-shm-usage'] }).catch(() => chromium.launch({ channel: 'chrome' }));
 const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
 await page.goto(pathToFileURL(path.join(work, 'reel.html')).href, { waitUntil: 'networkidle' });
 await page.evaluate(() => window.ready);
@@ -251,7 +251,7 @@ if (!args['no-music']) {
   await writeFile(path.join(work, 'music.wav'), soundtrack());
   inputs.push('-i', path.join(work, 'music.wav'));
 }
-await run('ffmpeg', ['-y', '-v', 'error', ...inputs, '-c:v', 'libx264', '-preset', 'slow', '-crf', '18', '-pix_fmt', 'yuv420p',
+await run('ffmpeg', ['-y', '-v', 'error', ...inputs, '-c:v', 'libx264', '-preset', process.env.FLEX_FFMPEG_PRESET || 'slow', '-crf', '18', '-pix_fmt', 'yuv420p',
   ...(args['no-music'] ? ['-an'] : ['-c:a', 'aac', '-b:a', '192k', '-shortest']), '-movflags', '+faststart', outFile]);
 if (!args.keep) await rm(work, { recursive: true, force: true });
 console.log(JSON.stringify({ reel: outFile, poster, format: args.format, seconds: DURATION, apps: apps.length, music: !args['no-music'] }, null, 2));

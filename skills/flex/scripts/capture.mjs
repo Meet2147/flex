@@ -37,6 +37,10 @@ const MOBILE = { width: 390, height: 844 };
 const MOBILE_UA =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/15E148 Safari/604.1';
 const SCRIPTS_DIR = path.dirname(fileURLToPath(import.meta.url));
+// Containers give Chrome a tiny /dev/shm; without this flag it crashes on heavier pages.
+const LAUNCH_ARGS = ['--disable-dev-shm-usage'];
+// Servers with little memory set FLEX_FFMPEG_PRESET=veryfast: slightly larger files, far less RAM.
+const PRESET = process.env.FLEX_FFMPEG_PRESET || 'slow';
 
 if (args.help || (!args.url && !args.batch) || !args.out) {
   console.error('usage: capture.mjs (--url <url> | --batch <apps.json>) --out <dir> [--plan plan.json]');
@@ -55,11 +59,11 @@ async function loadChromium() {
 
 async function launch(chromium) {
   try {
-    return await chromium.launch();
+    return await chromium.launch({ args: LAUNCH_ARGS });
   } catch (bundledError) {
     // No bundled Chromium downloaded: fall back to the Chrome already on the machine.
     try {
-      return await chromium.launch({ channel: 'chrome' });
+      return await chromium.launch({ channel: 'chrome', args: LAUNCH_ARGS });
     } catch {
       console.error(`${bundledError.message}\n\nNo browser available. Run:\n  npx --prefix "${SCRIPTS_DIR}" playwright install chromium`);
       process.exit(2);
@@ -436,7 +440,7 @@ async function recordClip(browser, app, outDir, opts) {
     await run('ffmpeg', [
       '-y', '-f', 'concat', '-safe', '0', '-i', path.join(framesDir, 'frames.txt'),
       '-vf', `fps=30,scale=${DESKTOP.width}:${DESKTOP.height}:flags=lanczos,format=yuv420p`,
-      '-c:v', 'libx264', '-preset', 'slow', '-crf', '25', '-movflags', '+faststart', '-an', clip,
+      '-c:v', 'libx264', '-preset', PRESET, '-crf', '25', '-movflags', '+faststart', '-an', clip,
     ]);
     return { clip: 'clip.mp4', clipSeconds: Number(elapsed.toFixed(1)) };
   } finally {

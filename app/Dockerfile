@@ -13,7 +13,7 @@ RUN npm ci --prefix app --omit=dev
 COPY skills/flex skills/flex
 COPY app app
 
-ENV NODE_ENV=production PORT=10000 DATA_DIR=/data
+ENV NODE_ENV=production PORT=10000 DATA_DIR=/data FLEX_FFMPEG_PRESET=veryfast
 EXPOSE 10000
 WORKDIR /srv/app
 CMD ["node", "src/server.mjs"]

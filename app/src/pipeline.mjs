@@ -34,9 +34,21 @@ async function drain() {
   working = false;
 }
 
-// Pick up anything interrupted by a restart.
+// After a restart: waiting orders carry on. An order that was mid-run gets one more try, because the restart may
+// have been a deploy. If it was already retried, or the run itself is what killed the server, it is failed instead
+// of being started again, so one heavy order can never put the service into a crash loop.
 export async function resume() {
-  for (const order of await ordersWithStatus('queued', 'capturing', 'writing', 'building', 'reel')) enqueue(order.id);
+  for (const order of await ordersWithStatus('queued')) enqueue(order.id);
+  for (const order of await ordersWithStatus('capturing', 'writing', 'building', 'reel')) {
+    if (order.startedAt && (order.resumes ?? 0) < 1) {
+      await updateOrder(order.id, { status: 'queued', resumes: (order.resumes ?? 0) + 1 });
+      enqueue(order.id);
+      continue;
+    }
+    console.error(`order ${order.id} was interrupted twice; marking it failed`);
+    const failed = await updateOrder(order.id, { status: 'failed', error: 'The server ran out of room while making this page. Press try again; nothing was charged twice.' });
+    if (failed.plan === 'pass' && !failed.readyAt && !failed.refund && failed.paidVia !== 'simulated') await updateOrder(order.id, await refundOrder(failed));
+  }
 }
 
 function run(script, args, timeoutMs) {
@@ -111,7 +123,7 @@ async function processOrder(id) {
   const mediaRoot = path.join(pageDir, 'media');
   await rm(pageDir, { recursive: true, force: true });
   await mkdir(mediaRoot, { recursive: true });
-  await updateOrder(id, { status: 'capturing', error: null, apps: order.urls.map((url) => ({ url, state: 'waiting' })) });
+  await updateOrder(id, { status: 'capturing', error: null, startedAt: new Date().toISOString(), apps: order.urls.map((url) => ({ url, state: 'waiting' })) });
 
   const captured = [];
   const used = new Set();

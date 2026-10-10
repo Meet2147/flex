@@ -120,6 +120,10 @@ if (order) {
     }
     if (state.status === 'failed') {
       title.textContent = 'this one did not work.';
+      const again = Object.assign(document.createElement('button'), { className: 'go', type: 'button', textContent: 'try again →' });
+      again.onclick = async () => { again.disabled = true; await fetch(`/api/orders/${id}/refresh`, { method: 'POST' }); done.hidden = true; poll(); };
+      done.replaceChildren(again);
+      done.hidden = false;
       detail.textContent = `${state.error || 'Something went wrong.'}${state.refund === 'refunded' ? ' Your payment has been refunded.' : state.plan === 'pass' ? ' You will be refunded; nothing more to do.' : ''}`;
       return true;
     }

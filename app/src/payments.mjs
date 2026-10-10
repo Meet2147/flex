@@ -46,6 +46,7 @@ export async function refundOrder(order) {
     }
     if (!polarOrderId) return { refund: 'manual', refundNote: 'no Polar order found for this checkout' };
     amount ??= (await polar('GET', `/v1/orders/${polarOrderId}`)).total_amount;
+    if (!amount) return { refund: 'not-needed', polarOrderId }; // paid with a 100% discount: nothing to give back
     await polar('POST', '/v1/refunds/', { order_id: polarOrderId, reason: 'service_disruption', amount, comment: `flex order ${order.slug}: no page could be made` });
     return { refund: 'refunded', refundedAt: new Date().toISOString(), polarOrderId };
   } catch (error) {

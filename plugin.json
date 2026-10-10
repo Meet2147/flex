@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "flex",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Turn every app you've built into one portfolio page, with real screenshots and short clips captured from the apps themselves.",
   "author": { "name": "Meet Jethwa", "url": "https://github.com/Meet2147" },
   "homepage": "https://letsflex.app",

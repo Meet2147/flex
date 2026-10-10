@@ -4,7 +4,7 @@ import { readFile, rm } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 import Anthropic from '@anthropic-ai/sdk';
-import { z } from 'zod';
+import { z } from 'zod/v4'; // the SDK's zodOutputFormat reads zod v4 schemas
 import { zodOutputFormat } from '@anthropic-ai/sdk/helpers/zod';
 import { config } from './config.mjs';
 

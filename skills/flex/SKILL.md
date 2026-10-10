@@ -122,7 +122,8 @@ This writes `<out>/index.html` with styles and script inlined, and `og.jpg` for 
     "facts": [{ "value": "40k", "label": "downloads" }],
     "cta": "Got an idea? *Say hello.*"
   },
-  "theme": { "style": "editorial", "mode": "auto", "accent": "#ff5a1f", "featuredCount": 6, "fonts": true, "credit": true },
+  "share": "A caption to post with the page.",
+  "theme": { "style": "editorial", "tone": "", "mode": "auto", "accent": "#ff5a1f", "featuredCount": 6, "fonts": true, "credit": true },
   "apps": [
     {
       "slug": "cutlist", "name": "Cutlist", "year": 2025, "status": "Live", "platforms": ["Web", "macOS"],
@@ -165,7 +166,7 @@ This writes `<out>/index.html` with styles and script inlined, and `og.jpg` for 
 
 ### Freeform direction
 
-A style is a starting point, not a limit. When the user gives direction in their own words ("make it feel like a zine", "dry, like release notes", "fake Series A energy"), let it shape the copy first: word choice, sentence length, the headline and the closing line. If it also implies a look no preset covers, copy `<skill-dir>/assets/page.css` to `<out>/page.css` and change the tokens there. Direction changes the voice, never the facts.
+A style is a starting point, not a limit. Record the direction as `theme.tone` in `portfolio.json` so a later rebuild or `--add` keeps the same voice. When the user gives direction in their own words ("make it feel like a zine", "dry, like release notes", "fake Series A energy"), let it shape the copy first: word choice, sentence length, the headline and the closing line. If it also implies a look no preset covers, copy `<skill-dir>/assets/page.css` to `<out>/page.css` and change the tokens there. Direction changes the voice, never the facts.
 
 ### Then look at the page
 
@@ -173,7 +174,7 @@ Open `<out>/index.html` and check it at desktop and phone width, light and dark.
 
 ## 5. Reel and share copy
 
-**Share copy.** Always write `<out>/share-copy.txt`: one to three sentences the developer can post as they are, with the page's link if `owner.site` is known. Specific to these apps, in the page's voice, addressed to the reader. No "excited to share", no hashtags unless asked.
+**Share copy.** Always put a `"share"` string at the top level of `portfolio.json`: one to three sentences the developer can post as they are, with the page's link if `owner.site` is known. The build writes it to `<out>/share-copy.txt`. Specific to these apps, in the page's voice, addressed to the reader. No "excited to share", no hashtags unless asked.
 
 **Reel.** When asked for a reel, a video, or something to post, or with `--reel`:
 

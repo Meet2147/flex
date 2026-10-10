@@ -62,6 +62,9 @@ const publicView = (order) => ({
   ...(order.status === 'ready' && {
     pageUrl: `${config.baseUrl}/p/${order.slug}/`,
     canDownload: PLANS[order.plan].zip,
+    shareCopy: order.shareCopy ?? null,
+    reel: order.reelFile ? `/o/${order.id}/reel` : null,
+    reelError: order.reelError ?? null,
     refreshesLeft: Math.max(0, PLANS[order.plan].refreshes - order.refreshesUsed),
   }),
 });
@@ -92,6 +95,9 @@ app.post('/api/orders', async (c) => {
   const name = String(body.name ?? '').trim().slice(0, 60);
   const handle = String(body.handle ?? '').trim().slice(0, 40);
   const style = STYLES.some(([key]) => key === body.style) ? body.style : 'genz';
+  // Free text from a stranger: keep it short and plain, and hand it to the copywriter as a description of voice only.
+  const tone = String(body.tone ?? '').replace(/[\u0000-\u001f<>{}`]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 140);
+  const reel = ['landscape', 'vertical'].includes(body.reel) ? body.reel : null;
   // One app per line. A line may end with what to click to get past an intro screen:  https://site.com click: Enter
   const lines = (Array.isArray(body.urls) ? body.urls : String(body.urls ?? '').split(/[\n,]+/)).map((line) => String(line).trim()).filter(Boolean);
   const entries = new Map();
@@ -121,7 +127,7 @@ app.post('/api/orders', async (c) => {
   if (body.checkout) {
     const checkoutId = String(body.checkout);
     if (plan !== 'pass' || !(await checkoutSucceeded(checkoutId).catch(() => false))) return c.json({ error: 'We could not confirm that payment.' }, 402);
-    const order = await createOrder({ plan, owner: { name, handle }, urls, hints, style, paid: checkoutId });
+    const order = await createOrder({ plan, owner: { name, handle }, urls, hints, style, tone, reel, paid: checkoutId });
     if (!(await claimCheckout(checkoutId, order.id))) {
       await updateOrder(order.id, { status: 'failed', error: 'This payment was already used for another page.' });
       return c.json({ error: 'That payment has already been used to make a page.', next: `/o/${await claimedOrder(checkoutId)}` }, 409);
@@ -130,7 +136,7 @@ app.post('/api/orders', async (c) => {
     return c.json({ next: `/o/${order.id}` });
   }
 
-  const order = await createOrder({ plan, owner: { name, handle }, urls, hints, style });
+  const order = await createOrder({ plan, owner: { name, handle }, urls, hints, style, tone, reel: PLANS[plan].reel ? reel : null });
   if (plan === 'free') {
     enqueue(order.id);
     return c.json({ next: `/o/${order.id}` });
@@ -181,6 +187,12 @@ app.get('/o/:id/download', async (c) => {
   if (!order || order.status !== 'ready' || !PLANS[order.plan].zip) return c.html(notFound(), 404);
   const file = await zipFor(order);
   return sendFile(c, path.dirname(file), path.basename(file), { cache: 'no-store', download: `${order.slug}.zip` });
+});
+
+app.get('/o/:id/reel', async (c) => {
+  const order = await getOrder(c.req.param('id'));
+  if (!order || order.status !== 'ready' || !order.reelFile) return c.html(notFound(), 404);
+  return sendFile(c, path.join(pagesDir, order.slug), order.reelFile, { cache: 'no-store', download: c.req.query('view') ? undefined : `${order.slug}-${order.reelFile}` });
 });
 
 app.post('/api/webhooks/polar', async (c) => {

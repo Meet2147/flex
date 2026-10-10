@@ -29,7 +29,7 @@ export function legalPages() {
 <h2>3. Plans and price</h2>
 <ul>
 <li><b>Free:</b> up to ${free.apps} Apps, screenshots only. We may limit how many free pages one person makes, and may remove free pages at any time.</li>
-<li><b>${pass.name}:</b> a one-time payment of $${pass.price}, shown before you pay, for one Page of up to ${pass.apps} Apps with clips, a zip download of the Page, ${pass.refreshes} re-captures, and hosting for 12 months from the day the Page is first ready. Nothing renews. After 12 months the hosted Page stops being served; the zip is yours to host anywhere for as long as you like.</li>
+<li><b>${pass.name}:</b> a one-time payment of $${pass.price}, shown before you pay, for one Page of up to ${pass.apps} Apps with clips, an optional short video of the Page's Apps (a "reel"), a zip download of the Page, ${pass.refreshes} re-captures, and hosting for 12 months from the day the Page is first ready. Nothing renews. After 12 months the hosted Page stops being served; the zip is yours to host anywhere for as long as you like.</li>
 </ul>
 <p>Refunds are covered by the <a href="/refunds">refund policy</a>. Nothing here limits a refund right that consumer law gives you.</p>
 
@@ -73,7 +73,7 @@ export function legalPages() {
 <p>flex makes a portfolio page from links to apps. This page says what you can submit and what you can't. It is part of the <a href="/terms">terms</a>.</p>
 
 <h2>What you can submit</h2>
-<p>Your own apps and sites, or ones whose owner has agreed to you showing them. You give us links, a name and, optionally, a handle. You can't upload files or type instructions for the AI.</p>
+<p>Your own apps and sites, or ones whose owner has agreed to you showing them. You give us links, a name and, optionally, a handle and a short note on tone. The note changes how your page is worded, not what it claims. You can't upload files.</p>
 
 <h2>How the page is made</h2>
 <p>Automatically. Software opens each link the way a visitor would, without logging in, and builds the page from the app's own words, colours and screens. It does not create people, faces or voices.</p>
@@ -126,7 +126,7 @@ export function legalPages() {
 
 <h2>1. What we collect</h2>
 <ul>
-<li><b>What you type.</b> The app links, the name for the page and, if you give one, a handle.</li>
+<li><b>What you type.</b> The app links, the name for the page and, if you give them, a handle and a note on tone.</li>
 <li><b>What is on your apps.</b> Our software visits each link's public pages and keeps screenshots, a short clip, and text such as titles and headings. If those pages show personal data (a founder's name or photo, say), it can end up on your page.</li>
 <li><b>Order records.</b> An order ID, your links, plan, timestamps, progress, and the page we built.</li>
 <li><b>Payment details from Polar.</b> Your email address, the Polar order and checkout IDs, and whether the payment went through or was refunded. We never receive card details.</li>

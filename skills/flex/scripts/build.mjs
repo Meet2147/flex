@@ -257,4 +257,7 @@ if (args.og) {
   }
 }
 
+// The caption to post with the page. Written by whoever wrote portfolio.json, saved beside the page.
+if (typeof data.share === 'string' && data.share.trim()) await writeFile(path.join(outDir, 'share-copy.txt'), `${data.share.trim()}\n`);
+
 console.log(JSON.stringify({ index: indexFile, apps: apps.length, og: hasOg, warnings: [...new Set(warnings)] }, null, 2));

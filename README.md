@@ -12,7 +12,7 @@ No CMS, no template to fill in, no screenshots to take by hand.
 
 ## Rather not run it yourself? Use letsflex.app
 
-[letsflex.app](https://letsflex.app) runs `/flex` for you. Paste your links, pick a style, and get a hosted page a few minutes later. Three apps with screenshots are free; a Page Pass ($29, once) covers twelve apps with video clips and a zip download. No account.
+[letsflex.app](https://letsflex.app) runs `/flex` for you. Paste your links, pick a style, and get a hosted page a few minutes later. Three apps with screenshots and a caption to post are free; a Page Pass ($29, once) covers twelve apps with video clips, a reel to post and a zip download. No account.
 
 The skill stays free and open source. Install it below and run it yourself anytime.
 

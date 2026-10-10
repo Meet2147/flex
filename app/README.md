@@ -11,7 +11,7 @@ Paste app links, get a portfolio page. This is the paid half of /flex: it runs t
 - App Store links: the listing's own screenshots are used
 - Links are checked before a browser opens them: public http(s) hosts only
 
-Also in place: seven page styles chosen on the form, automatic click-through of intro screens, automatic refunds when a paid order produces nothing, page expiry 12 months after a Page Pass page is first ready, and terms, acceptable use, refund and privacy pages.
+Also in place: a reel of every app for Page Pass (vertical or landscape, with music), a caption to post written for every page, a free-text tone note that steers the wording, seven page styles chosen on the form, automatic click-through of intro screens, automatic refunds when a paid order produces nothing, page expiry 12 months after a Page Pass page is first ready, and terms, acceptable use, refund and privacy pages.
 
 Not built yet: Pro (accounts, custom domains, monthly refresh, analytics) and email.
 

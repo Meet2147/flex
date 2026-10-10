@@ -88,7 +88,8 @@ const ink = (hex) => {
   const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
   return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.4 ? '#0b0b0b' : '#ffffff';
 };
-const host = (() => { try { return new URL(owner.site).host.replace(/^www\./, ''); } catch { return owner.handle ?? ''; } })();
+// What the last frame points people to: an explicit tag, else the site's address, else the handle.
+const host = owner.reelTag ?? (() => { try { return new URL(owner.site).host.replace(/^www\./, ''); } catch { return owner.handle ?? ''; } })();
 const u = Math.min(W, H) / 1080; // one unit of type size, so the three formats share a layout
 const wide = args.format === 'landscape';
 

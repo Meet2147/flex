@@ -7,11 +7,20 @@ if (maker) {
   const plan = () => new FormData(maker).get('plan');
   const label = () => (plan() === 'pass' ? go.dataset.pass : 'flex for me · free →');
   go.dataset.pass = go.textContent;
-  maker.addEventListener('change', () => (go.textContent = label()));
+  // The reel is cut from video clips, which only Page Pass captures.
+  const reelpick = $('reelpick');
+  const syncReel = () => {
+    const off = plan() !== 'pass';
+    reelpick.classList.toggle('off', off);
+    for (const input of reelpick.querySelectorAll('input')) { input.disabled = off && input.value !== ''; if (off && input.value === '') input.checked = true; }
+  };
+  syncReel();
+  maker.addEventListener('change', () => { go.textContent = label(); syncReel(); });
   document.querySelectorAll('[data-plan]').forEach((link) =>
     link.addEventListener('click', () => {
       maker.querySelector(`[name="plan"][value="${link.dataset.plan}"]`).checked = true;
       go.textContent = label();
+      syncReel();
       setTimeout(() => $('urls').focus(), 50);
     }),
   );
@@ -58,6 +67,7 @@ if (order) {
     capturing: ['capturing your apps', 'About 30 seconds each. This page updates by itself.'],
     writing: ['writing the copy', 'Reading what was captured and writing each section.'],
     building: ['building the page', 'Nearly there.'],
+    reel: ['cutting your reel', 'Putting every app to music. About a minute.'],
   };
   const host = (url) => { try { return new URL(url).host.replace(/^www\./, ''); } catch { return url; } };
 
@@ -87,7 +97,24 @@ if (order) {
       }
       const share = Object.assign(document.createElement('input'), { readOnly: true, value: state.pageUrl, className: 'share' });
       share.onclick = () => share.select();
-      done.replaceChildren(...nodes, share);
+      const extras = [];
+      if (state.reel) {
+        nodes.push(link('Download reel', state.reel));
+        const box = Object.assign(document.createElement('div'), { className: 'reelbox' });
+        box.append(Object.assign(document.createElement('video'), { src: `${state.reel}?view=1`, controls: true, playsInline: true, preload: 'metadata' }));
+        extras.push(box);
+      } else if (state.reelError) {
+        extras.push(Object.assign(document.createElement('p'), { className: 'note', textContent: state.reelError }));
+      }
+      if (state.shareCopy) {
+        const box = Object.assign(document.createElement('div'), { className: 'sharebox' });
+        const text = Object.assign(document.createElement('textarea'), { value: state.shareCopy, rows: 3 });
+        const copy = Object.assign(document.createElement('button'), { className: 'btn', type: 'button', textContent: 'Copy caption' });
+        copy.onclick = async () => { text.select(); try { await navigator.clipboard.writeText(text.value); copy.textContent = 'Copied'; } catch { document.execCommand('copy'); copy.textContent = 'Copied'; } };
+        box.append(Object.assign(document.createElement('b'), { textContent: 'a caption to post with it' }), text, copy);
+        extras.push(box);
+      }
+      done.replaceChildren(...nodes, share, ...extras);
       done.hidden = false;
       return true;
     }

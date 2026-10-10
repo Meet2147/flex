@@ -23,7 +23,7 @@ async function write(order) {
   return order;
 }
 
-export function createOrder({ plan, owner, urls, hints = {}, style = 'genz', email, paid }) {
+export function createOrder({ plan, owner, urls, hints = {}, style = 'genz', tone = '', reel = null, email, paid }) {
   const id = randomBytes(18).toString('base64url'); // the private link; unguessable
   return write({
     id,
@@ -33,6 +33,8 @@ export function createOrder({ plan, owner, urls, hints = {}, style = 'genz', ema
     urls,
     hints, // url → text to click first, for sites that open on an intro screen
     style,
+    tone, // the customer's own words about how the page should sound
+    reel, // null, 'landscape' or 'vertical'
     email: email ?? null,
     status: plan === 'free' || paid ? 'queued' : 'awaiting_payment',
     ...(paid && { paidAt: new Date().toISOString(), paidVia: 'link', checkoutId: paid }),

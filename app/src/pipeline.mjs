@@ -36,7 +36,7 @@ async function drain() {
 
 // Pick up anything interrupted by a restart.
 export async function resume() {
-  for (const order of await ordersWithStatus('queued', 'capturing', 'writing', 'building')) enqueue(order.id);
+  for (const order of await ordersWithStatus('queued', 'capturing', 'writing', 'building', 'reel')) enqueue(order.id);
 }
 
 function run(script, args, timeoutMs) {
@@ -136,13 +136,14 @@ async function processOrder(id) {
   if (!captured.length) throw new Error('None of the apps could be captured.');
 
   await updateOrder(id, { status: 'writing' });
-  const copy = await writeCopy(order.owner, captured, pageDir, order.style);
+  const copy = await writeCopy(order.owner, captured, pageDir, order.style, order.tone);
 
   await updateOrder(id, { status: 'building', copySource: copy.source });
   const bySlug = new Map(copy.apps.map((a) => [a.slug, a]));
   const portfolio = {
-    owner: { name: order.owner.name, handle: order.owner.handle || undefined, headline: copy.headline, bio: copy.bio || undefined, links: order.owner.links ?? [], site: `${config.baseUrl}/p/${order.slug}` },
-    theme: { style: order.style ?? 'genz', mode: 'auto', featuredCount: 8, credit: true },
+    owner: { name: order.owner.name, handle: order.owner.handle || undefined, headline: copy.headline, bio: copy.bio || undefined, links: order.owner.links ?? [], site: `${config.baseUrl}/p/${order.slug}`, reelTag: order.owner.handle || `${new URL(config.baseUrl).host}/p/${order.slug}` },
+    share: `${copy.share} ${config.baseUrl}/p/${order.slug}/`,
+    theme: { style: order.style ?? 'genz', tone: order.tone || undefined, mode: 'auto', featuredCount: 8, credit: true },
     apps: captured.map((app) => {
       const words = bySlug.get(app.slug);
       const media = app.shots
@@ -159,12 +160,28 @@ async function processOrder(id) {
 
   const built = await run('build.mjs', [path.join(pageDir, 'portfolio.json'), '--og'], 90_000);
   if (built.code !== 0 || !(await exists(path.join(pageDir, 'index.html')))) throw new Error(`Page build failed: ${built.stderr.split('\n')[0]}`);
+  // The reel is an extra: if it fails, the page still ships and the order says the reel is missing.
+  let reel = null, reelError = null;
+  if (plan.reel && order.reel) {
+    await updateOrder(id, { status: 'reel' });
+    const made = await run('reel.mjs', [path.join(pageDir, 'portfolio.json'), '--format', order.reel], 420_000);
+    const file = order.reel === 'landscape' ? 'reel.mp4' : `reel-${order.reel}.mp4`;
+    if (made.code === 0 && (await exists(path.join(pageDir, file)))) reel = file;
+    else {
+      reelError = 'The reel could not be made this time. Re-capture to try again.';
+      console.error(`reel for ${order.slug} failed: ${made.stderr.slice(-300)}`);
+    }
+  }
+
   await rm(liveDir, { recursive: true, force: true });
   await rename(pageDir, liveDir);
   await rm(path.join(zipsDir, `${order.slug}.zip`), { force: true });
   const now = Date.now();
   await updateOrder(id, (o) => {
     o.status = 'ready';
+    o.shareCopy = portfolio.share;
+    o.reelFile = reel;
+    o.reelError = reelError;
     o.readyAt ??= new Date(now).toISOString();
     if (plan.hostedDays) o.expiresAt ??= new Date(now + plan.hostedDays * 86_400_000).toISOString();
   });

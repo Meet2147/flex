@@ -3,3 +3,4 @@ node_modules/
 .frames/
 app/data/
 app/.env
+app/data-sim/

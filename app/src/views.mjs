@@ -67,15 +67,22 @@ function maker({ paid = null } = {}) {
       <legend>pick a vibe</legend>
       ${STYLES.map(([key, label, hint], i) => `<label title="${esc(hint)}"><input type="radio" name="style" value="${key}"${i === 0 ? ' checked' : ''}><span>${esc(label)}</span></label>`).join('')}
     </fieldset>
+    <div><label for="tone">anything else about the tone? <small>optional</small></label><input id="tone" name="tone" maxlength="140" placeholder="dry, like release notes" autocomplete="off"></div>
+    <fieldset class="vibes reel" id="reelpick">
+      <legend>add a reel <small>a ~20s video of all your apps, with music · page pass</small></legend>
+      <label><input type="radio" name="reel" value="" checked><span>no reel</span></label>
+      <label><input type="radio" name="reel" value="vertical"><span>vertical · reels, shorts</span></label>
+      <label><input type="radio" name="reel" value="landscape"><span>landscape · x, linkedin</span></label>
+    </fieldset>
     ${
       paid
         ? `<input type="hidden" name="plan" value="pass"><input type="hidden" name="checkout" value="${esc(paid)}">`
         : `<fieldset class="plans">
       <legend class="sr">plan</legend>
       <label class="plan"><input type="radio" name="plan" value="pass" checked>
-        <span><b>${pass.name.toLowerCase()} · $${pass.price} once</b><i>up to ${pass.apps} apps, video clips, zip download, hosted 12 months</i></span></label>
+        <span><b>${pass.name.toLowerCase()} · $${pass.price} once</b><i>up to ${pass.apps} apps, video clips, a reel to post, zip download, hosted 12 months</i></span></label>
       <label class="plan"><input type="radio" name="plan" value="free">
-        <span><b>free</b><i>up to ${free.apps} apps, screenshots only</i></span></label>
+        <span><b>free</b><i>up to ${free.apps} apps, screenshots and a caption to post</i></span></label>
     </fieldset>`
     }
     <p class="error" id="error" role="alert" hidden></p>
@@ -86,7 +93,7 @@ function maker({ paid = null } = {}) {
 
 export function landing() {
   const { free, pass } = PLANS;
-  const words = ['real screenshots', 'looping clips', 'copy written for you', 'one link to share', 'no login', 'no template', '7 vibes'];
+  const words = ['real screenshots', 'looping clips', 'a reel to post', 'copy written for you', 'one link to share', 'no login', 'no template', '7 vibes'];
   return shell({
     title: '/flex — you shipped it. now flex.',
     description: `Paste your app links, get one portfolio page with real screenshots and a clip of every app. Free for ${free.apps} apps, $${pass.price} once for ${pass.apps}.`,
@@ -96,7 +103,7 @@ export function landing() {
   <div class="pitch">
     <span class="tag">for indie devs with too many side projects</span>
     <h1>you shipped it.<br>now <mark>flex.</mark></h1>
-    <p class="lede">Paste the links to your apps. Get <b>one page</b> with real screenshots and a clip of every single one. No template to fill in, no screenshots to take.</p>
+    <p class="lede">Paste the links to your apps. Get <b>one page</b> with real screenshots and a clip of every single one, plus a <b>reel</b> and a caption to post. No template to fill in, no screenshots to take.</p>
   </div>
   ${maker()}
   <a class="peek" href="/example/"><img src="/example/og.jpg" alt="An example portfolio page made by flex" width="1200" height="630"><span class="sticker tilt">made from 8 links ↗</span></a>
@@ -107,7 +114,7 @@ export function landing() {
 <section class="wrap steps">
   <article><span class="num">1</span><h2>paste.</h2><p>Web apps, landing pages, App Store listings. We open each one the way a visitor would, intro screens included.</p></article>
   <article><span class="num">2</span><h2>pay.</h2><p>$${pass.price} once for up to ${pass.apps} apps. Or don't: ${free.apps} apps with screenshots are free.</p></article>
-  <article><span class="num">3</span><h2>flex.</h2><p>A few minutes later you have a public page to post and a private link to manage it. Bookmark the private one.</p></article>
+  <article><span class="num">3</span><h2>flex.</h2><p>A few minutes later you have a public page, a caption to post with it, and on Page Pass a reel of every app. Bookmark your private link.</p></article>
 </section>
 
 <section class="wrap pricing" id="pricing">
@@ -120,6 +127,8 @@ export function landing() {
       <tr><th>runs on</th><td>your machine and agent</td><td>our servers</td><td class="hot">our servers</td><td>our servers</td></tr>
       <tr><th>apps</th><td>unlimited</td><td>${free.apps}</td><td class="hot">${pass.apps}</td><td>unlimited</td></tr>
       <tr><th>video clips</th><td>${yes}</td><td>${no}</td><td class="hot">${yes}</td><td>${yes}</td></tr>
+      <tr><th>reel to post</th><td>${yes}</td><td>${no}</td><td class="hot">${yes}</td><td>${yes}</td></tr>
+      <tr><th>caption to post</th><td>${yes}</td><td>${yes}</td><td class="hot">${yes}</td><td>${yes}</td></tr>
       <tr><th>hosting</th><td>your own</td><td>a link on this site</td><td class="hot">a link on this site, 12 months</td><td>your own domain</td></tr>
       <tr><th>download as zip</th><td>already yours</td><td>${no}</td><td class="hot">${yes}</td><td>${yes}</td></tr>
       <tr><th>refresh</th><td>when you re-run it</td><td>${no}</td><td class="hot">${pass.refreshes} times</td><td>monthly, automatic</td></tr>
@@ -141,6 +150,7 @@ export function landing() {
     <div><dt>my site opens on an intro screen.</dt><dd>We click through those automatically. If we miss, add what to click after the link, like <code>https://mysite.com click: Enter</code>, and re-capture.</dd></div>
     <div><dt>what if a capture fails?</dt><dd>That app is left off and the rest of the page is still built. If nothing can be captured on a paid order, it is refunded automatically.</dd></div>
     <div><dt>can i edit the page?</dt><dd>Page Pass includes the zip: one HTML file, your media and a <code>portfolio.json</code> you can change and rebuild with the free skill.</dd></div>
+    <div><dt>what's the reel?</dt><dd>A video of about 20 seconds: your headline, every app with its name and a real clip, then your link, cut to music. Vertical for Reels and Shorts, landscape for X and LinkedIn. Included with Page Pass.</dd></div>
     <div><dt>whose apps can i add?</dt><dd>Your own. Pages that pass off other people's work are removed. See the <a href="/acceptable-use">acceptable use policy</a>.</dd></div>
     <div><dt>can i change the vibe later?</dt><dd>Free pages: make a new one. Page Pass: the zip rebuilds in any style with one line in <code>portfolio.json</code>.</dd></div>
   </dl>

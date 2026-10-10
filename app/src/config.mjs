@@ -28,8 +28,8 @@ export const config = {
 };
 
 export const PLANS = {
-  free: { name: 'Hosted free', price: 0, apps: 3, video: false, refreshes: 0, zip: false },
-  pass: { name: 'Page Pass', price: 29, apps: 12, video: true, refreshes: 3, zip: true, hostedDays: 365 },
+  free: { name: 'Hosted free', price: 0, apps: 3, video: false, refreshes: 0, zip: false, reel: false },
+  pass: { name: 'Page Pass', price: 29, apps: 12, video: true, refreshes: 3, zip: true, reel: true, hostedDays: 365 },
 };
 
 // The webhook is optional: without it, an order is confirmed when the buyer returns from checkout.

@@ -5,7 +5,7 @@ services:
     runtime: docker
     dockerfilePath: ./app/Dockerfile
     dockerContext: .
-    plan: starter
+    plan: standard
     healthCheckPath: /healthz
     disk:
       name: flex-data

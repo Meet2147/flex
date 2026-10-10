@@ -63,6 +63,8 @@ const publicView = (order) => ({
     pageUrl: `${config.baseUrl}/p/${order.slug}/`,
     canDownload: PLANS[order.plan].zip,
     shareCopy: order.shareCopy ?? null,
+    copy: order.copySource ?? null, // 'claude', or 'fallback' with a short reason when the copywriter could not be used
+    copyNote: order.copyNote ?? null,
     reel: order.reelFile ? `/o/${order.id}/reel` : null,
     reelError: order.reelError ?? null,
     refreshesLeft: Math.max(0, PLANS[order.plan].refreshes - order.refreshesUsed),

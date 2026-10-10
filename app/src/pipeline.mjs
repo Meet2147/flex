@@ -138,7 +138,7 @@ async function processOrder(id) {
   await updateOrder(id, { status: 'writing' });
   const copy = await writeCopy(order.owner, captured, pageDir, order.style, order.tone);
 
-  await updateOrder(id, { status: 'building', copySource: copy.source });
+  await updateOrder(id, { status: 'building', copySource: copy.source, copyNote: copy.reason ? String(copy.reason) : null });
   const bySlug = new Map(copy.apps.map((a) => [a.slug, a]));
   const portfolio = {
     owner: { name: order.owner.name, handle: order.owner.handle || undefined, headline: copy.headline, bio: copy.bio || undefined, links: order.owner.links ?? [], site: `${config.baseUrl}/p/${order.slug}`, reelTag: order.owner.handle || `${new URL(config.baseUrl).host}/p/${order.slug}` },

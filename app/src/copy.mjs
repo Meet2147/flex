@@ -112,8 +112,8 @@ export async function writeCopy(owner, apps, workDir, style, tone) {
     const reason =
       error instanceof Anthropic.AuthenticationError ? 'invalid API key'
       : error instanceof Anthropic.RateLimitError ? 'rate limited'
-      : error instanceof Anthropic.APIError ? `API error ${error.status}`
-      : error.message;
+      : error instanceof Anthropic.APIError ? `API error ${error.status}: ${String(error.message).slice(0, 160)}`
+      : `${error.name}: ${String(error.message).slice(0, 160)}`;
     console.error(`copywriting failed, using site text instead: ${reason}`);
     return { ...fallback, source: 'fallback', reason };
   }

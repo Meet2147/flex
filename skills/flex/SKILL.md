@@ -25,6 +25,8 @@ Usage: `/flex [inputs…] [options]`. Inputs and options can be flags or plain l
 | `--no-video` | stills only |
 | `--mode light\|dark\|auto` | auto |
 | `--style <name>` | `editorial`; see Styles below |
+| `--tone "<direction>"` | none; freeform direction for the look and the words, e.g. `--tone "dry, like release notes"` |
+| `--reel [landscape\|vertical\|square]` | off; also make a short video of the whole portfolio |
 
 `<skill-dir>` below is the directory containing this file. Scripts live in `<skill-dir>/scripts/`.
 
@@ -161,14 +163,35 @@ This writes `<out>/index.html` with styles and script inlined, and `og.jpg` for 
 
 `genz`, `appstore` and `neumorphism` are light only and `glass` is dark only; the others follow `theme.mode`. Match the copy to the look: `genz` wants short, casual lines, `professional` wants complete, measured sentences. The rule against inventing anything holds in every voice.
 
+### Freeform direction
+
+A style is a starting point, not a limit. When the user gives direction in their own words ("make it feel like a zine", "dry, like release notes", "fake Series A energy"), let it shape the copy first: word choice, sentence length, the headline and the closing line. If it also implies a look no preset covers, copy `<skill-dir>/assets/page.css` to `<out>/page.css` and change the tokens there. Direction changes the voice, never the facts.
+
 ### Then look at the page
 
 Open `<out>/index.html` and check it at desktop and phone width, light and dark. Fix copy that wraps badly, accents that clash, and any app whose section looks weaker than the rest. The default look is meant to be used as is. If the user asks for a different one, copy `<skill-dir>/assets/page.css` to `<out>/page.css` and edit the tokens at the top; the build picks up that copy.
 
-## 5. Deliver
+## 5. Reel and share copy
 
-Tell the user where the page is, how many apps made it in, and which ones fell back to stills or were skipped and why. Then offer:
+**Share copy.** Always write `<out>/share-copy.txt`: one to three sentences the developer can post as they are, with the page's link if `owner.site` is known. Specific to these apps, in the page's voice, addressed to the reader. No "excited to share", no hashtags unless asked.
+
+**Reel.** When asked for a reel, a video, or something to post, or with `--reel`:
+
+```bash
+node <skill-dir>/scripts/reel.mjs <out>/portfolio.json                    # reel.mp4, 1920×1080
+node <skill-dir>/scripts/reel.mjs <out>/portfolio.json --format vertical  # reel-vertical.mp4, 1080×1920
+node <skill-dir>/scripts/reel.mjs <out>/portfolio.json --format square    # reel-square.mp4, 1080×1080
+```
+
+It needs the page to be built first, because it reuses each app's captured clip. The reel opens on the owner's headline, gives every app a beat with its name, tagline and clip (up to eight apps, in page order), and closes on `owner.cta` and the site address. It runs 12 to 22 seconds at 120 bpm with its own synthesized soundtrack; `--no-music` leaves it silent. A poster image is written beside it and baked in as the first frame.
+
+Look at a few frames before handing it over (`ffmpeg -i reel.mp4 -vf "select='eq(n,45)+eq(n,150)+eq(n,400)',tile=3x1" -frames:v 1 sheet.jpg`): names that wrap badly or a tagline that is too long for the frame are fixed in `portfolio.json`, then re-run. Use vertical for Reels, Shorts and TikTok, landscape for X and LinkedIn. For a full launch video of a single app, the `brag` skill does that better.
+
+## 6. Deliver
+
+Tell the user where the page is, how many apps made it in, and which ones fell back to stills or were skipped and why. Point them to `share-copy.txt`, and to the reel if one was made. Then offer:
 
 - **Hosting.** The folder is a static site. Any of these is free: GitHub Pages (push the folder, enable Pages), Cloudflare Pages or Netlify (drag the folder in), Vercel (`vercel deploy` from the folder). Deploy only when the user asks, since it makes the page public.
 - **Updates.** `/flex --add <url or dir>` appends an app; re-running capture for one slug refreshes it. `portfolio.json` is theirs to edit by hand.
+- **A reel.** If none was made, offer one: it takes under a minute from the clips already captured.
 - **A launch video per app.** If the `brag` skill is installed, any app on the page can get one.

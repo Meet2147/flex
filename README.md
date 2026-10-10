@@ -16,6 +16,13 @@ No CMS, no template to fill in, no screenshots to take by hand.
 
 The skill stays free and open source. Install it below and run it yourself anytime.
 
+| | |
+|---|---|
+| ![letsflex.app home: paste your links, pick a vibe](docs/screens/home.jpg) | ![pricing: free skill, hosted free, page pass, pro](docs/screens/pricing.jpg) |
+| **Paste your links, pick a vibe.** No account. | **Free for 3 apps.** $29 once for 12, with video. |
+| ![order page: each app captured, then the page link](docs/screens/order.jpg) | ![a finished portfolio page](docs/screens/example.jpg) |
+| **Watch each app get captured,** then open your page. | **The result:** one page, every app, real screenshots and clips. |
+
 ## Install
 
 **Claude Code:**
@@ -43,6 +50,8 @@ Try it from a local checkout without installing: `claude --plugin-dir /path/to/f
 /flex ~/code                              # scans the folder, asks which projects to include
 /flex --add https://newapp.dev            # add an app to an existing page
 /flex --style glass https://myapp.com     # pick the look
+/flex --tone "dry, like release notes"    # steer the look and the words in your own terms
+/flex --reel vertical                     # also make a short video of the whole portfolio
 ```
 
 You get a `portfolio/` folder:
@@ -51,6 +60,8 @@ You get a `portfolio/` folder:
 portfolio/
   index.html          the whole page, styles and script inlined
   og.jpg              link-preview image
+  share-copy.txt      a caption you can post as it is
+  reel.mp4            optional: every app in about 20 seconds, with music
   portfolio.json      the data, yours to edit; rebuild any time
   media/<app>/        desktop.jpg, mobile.jpg, clip.mp4, meta.json
 ```
@@ -81,6 +92,20 @@ node skills/flex/scripts/build.mjs portfolio/portfolio.json --og
 
 The style also sets the voice of the copy: `genz` gets short, casual lines, `professional` gets complete, measured sentences. Nothing is invented in any of them.
 
+## Reel
+
+A page is for people who click. A reel is for the feed. `/flex --reel` cuts every app's captured clip into one short video: your headline, each app with its name and tagline, and your link at the end.
+
+![a frame from a portfolio reel](docs/reel.jpg)
+
+```bash
+node skills/flex/scripts/reel.mjs portfolio/portfolio.json                    # 1920×1080, for X and LinkedIn
+node skills/flex/scripts/reel.mjs portfolio/portfolio.json --format vertical  # 1080×1920, for Reels, Shorts, TikTok
+node skills/flex/scripts/reel.mjs portfolio/portfolio.json --format square    # 1080×1080
+```
+
+It runs 12 to 22 seconds at 120 bpm, every cut lands on a beat, and the soundtrack is synthesized on the spot, so there are no audio files to license. It takes under a minute, because the clips were already captured for the page. For a full launch video of one app, use [/brag](https://github.com/latent-spaces/brag).
+
 ## How it works
 
 1. **Gather.** Finds each app's deployed URL, or runs the project locally. Native and CLI apps use their existing screenshots; App Store links use the listing's own.
@@ -105,7 +130,7 @@ node skills/flex/scripts/build.mjs portfolio/portfolio.json --og
 
 ## What's in this repo
 
-- `skills/flex/` — the skill: instructions, capture and build scripts, the page template and its seven styles
+- `skills/flex/` — the skill: instructions, the capture, build and reel scripts, the page template and its seven styles
 - `app/` — the hosted service behind letsflex.app; see [app/README.md](app/README.md)
 - `examples/demo/` — a page for a fictional developer, built from the parody product sites in [brag](https://github.com/latent-spaces/brag) (MIT)
 - `docs/` — product and pricing notes
